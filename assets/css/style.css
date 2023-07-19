@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'DMSans-Bold';
+    src: url("../fonts/DMSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'DMSans-BoldItalic';
+    src: url("../fonts/DMSans-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: 'DMSans-Italic';
+    src: url("../fonts/DMSans-Italic.ttf");
+}
+
+@font-face {
+    font-family: 'DMSans-Medium';
+    src: url("../fonts/DMSans-Medium.ttf");
+}
+
+@font-face {
+    font-family: 'DMSans-MediumItalic';
+    src: url("../fonts/DMSans-MediumItalic.ttf");
+}
+
+@font-face {
+    font-family: 'TruenoRound';
+    src: url("../fonts/TruenoRound.otf");
+}
+
+.container-fluid,.row{
+    --bs-gutter-x: unset;
+}
+
+.landing-main{
+    background: url("../images/1bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 100vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.hs-lan-horse{
+    height: 55vh;
+}
+
+.fs-lan-title{
+    font-family: 'DMSans-Bold', serif;
+    color: #007549;
+}
+
+.fs-lan-caption{
+    font-family: 'DMSans-Bold', serif;
+    color: #01a862;
+}
+
+.fs-lan-primary-btn{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #007549;
+    border: 1px solid #007549;
+    padding: 10px 15px 10px 15px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+}
+
+.fs-lan-primary-btn:hover{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #007549;
+    border: 1px solid #007549;
+}
+
+.fs-lan-outline-primary-btn{
+    font-family: 'DMSans-Medium', serif;
+    background-color: rgba(248, 248, 248, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
+    color: #007549;
+    padding: 10px 15px 10px 15px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+}
+
+.fs-lan-outline-primary-btn:hover{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #007549;
+    border: 1px solid #007549;
+    color: #ffffff;
+}
+
+h1{
+    font-size: calc(1.8rem + 1.5vw);
+}
