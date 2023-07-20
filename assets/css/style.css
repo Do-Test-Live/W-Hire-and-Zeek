@@ -90,3 +90,61 @@
 h1{
     font-size: calc(1.8rem + 1.5vw);
 }
+
+.login-main{
+    background-color: #f8f8f8;
+    height: 100vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.login-interface{
+    padding: 3rem;
+}
+
+.fs-form-control{
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    padding: 18px 15px;
+}
+
+.fs-login-horizonal-line {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.fs-login-horizonal-line span {
+    font-family: 'DMSans-Medium', serif;
+    background:#f8f8f8;
+    padding:0 10px;
+}
+
+.fs-secondary-btn{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #01a862;
+    border: 1px solid #01a862;
+    padding: 10px 15px 10px 15px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+}
+
+.fs-secondary-btn:hover{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #01a862;
+    border: 1px solid #01a862;
+    padding: 10px 15px 10px 15px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+}
+
+.fs-url{
+    font-family: 'DMSans-Bold', serif;
+    color: #01a862;
+}
+
+.fs-login-title{
+
+}
