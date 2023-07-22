@@ -103,7 +103,17 @@ h1{
 }
 
 .fs-form-control{
+    font-family: 'DMSans-Medium', serif;
     background-color: #f8f8f8;
+    border-radius: 15px;
+    padding: 18px 15px;
+}
+
+.fs-select-control{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #f8f8f8;
+    color: #01a862;
+    font-weight: bold;
     border-radius: 15px;
     padding: 18px 15px;
 }
@@ -143,6 +153,34 @@ h1{
 .fs-url{
     font-family: 'DMSans-Bold', serif;
     color: #01a862;
+}
+
+.fs-url-un{
+    font-family: 'DMSans-Bold', serif;
+    color: #01a862;
+    border-bottom: 1px solid #01a862;
+}
+
+.fs-verification-1{
+    background: url("../images/1bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 100vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.fs-verification-2{
+    background: url("../images/1bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 100vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.fs-mobile{
+    height: 200px;
 }
 
 .fs-login-title{
