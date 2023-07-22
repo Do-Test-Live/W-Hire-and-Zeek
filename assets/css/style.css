@@ -64,10 +64,10 @@
     border-radius: 15px;
 }
 
-.fs-lan-primary-btn:hover{
+.fs-lan-primary-btn:hover,.fs-lan-primary-btn:focus-visible,.fs-lan-primary-btn:active{
     font-family: 'DMSans-Medium', serif;
-    background-color: #007549;
-    border: 1px solid #007549;
+    background-color: #007549 !important;
+    border: 1px solid #007549 !important;
 }
 
 .fs-lan-outline-primary-btn{
@@ -80,11 +80,11 @@
     border-radius: 15px;
 }
 
-.fs-lan-outline-primary-btn:hover{
+.fs-lan-outline-primary-btn:hover,.fs-lan-outline-primary-btn:active.fs-lan-outline-primary-btn:focus-visible{
     font-family: 'DMSans-Medium', serif;
-    background-color: #007549;
-    border: 1px solid #007549;
-    color: #ffffff;
+    background-color: #00754900 !important;
+    border: 1px solid #00754900 !important;
+    color: #01a862;
 }
 
 h1{
@@ -131,10 +131,10 @@ h1{
     border-radius: 15px;
 }
 
-.fs-secondary-btn:hover{
+.fs-secondary-btn:hover,.fs-secondary-btn:active,.fs-secondary-btn:focus-visible{
     font-family: 'DMSans-Medium', serif;
-    background-color: #01a862;
-    border: 1px solid #01a862;
+    background-color: #01a862 !important;
+    border: 1px solid #01a862 !important;
     padding: 10px 15px 10px 15px;
     font-size: calc(0.7rem + 1vw);
     border-radius: 15px;
