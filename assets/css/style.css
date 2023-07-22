@@ -114,12 +114,12 @@ h1{
     background-color: #f8f8f8;
     border-radius: 15px;
     padding: 18px 15px;
+    border: 1px solid #c5d7cf;
 }
 
 .fs-form-control::placeholder{
     font-family: 'DMSans-Medium', serif;
     color: #b9b9b9;
-    border: 1px solid #c5d7cf;
 }
 
 .fs-select-control{
@@ -130,12 +130,12 @@ h1{
     border-radius: 15px;
     padding: 18px 15px;
     font-size: 12px;
+    border: 1px solid #c5d7cf;
 }
 
 .fs-select-control::placeholder{
     font-family: 'DMSans-Medium', serif;
     color: #b9b9b9;
-    border: 1px solid #c5d7cf;
 }
 
 .fs-login-horizonal-line {
