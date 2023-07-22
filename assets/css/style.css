@@ -98,6 +98,13 @@ h1{
     margin: auto;
 }
 
+.signup-main{
+    background-color: #f8f8f8;
+    height: 125vh;
+    max-width: 520px;
+    margin: auto;
+}
+
 .login-interface{
     padding: 3rem;
 }
@@ -109,6 +116,12 @@ h1{
     padding: 18px 15px;
 }
 
+.fs-form-control::placeholder{
+    font-family: 'DMSans-Medium', serif;
+    color: #b9b9b9;
+    border: 1px solid #c5d7cf;
+}
+
 .fs-select-control{
     font-family: 'DMSans-Medium', serif;
     background-color: #f8f8f8;
@@ -116,6 +129,13 @@ h1{
     font-weight: bold;
     border-radius: 15px;
     padding: 18px 15px;
+    font-size: 12px;
+}
+
+.fs-select-control::placeholder{
+    font-family: 'DMSans-Medium', serif;
+    color: #b9b9b9;
+    border: 1px solid #c5d7cf;
 }
 
 .fs-login-horizonal-line {
