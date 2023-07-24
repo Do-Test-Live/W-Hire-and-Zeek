@@ -203,6 +203,91 @@ h1{
     height: 200px;
 }
 
+.expertise-main{
+    background: url("../images/7bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 120vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.expertise-interface{
+    padding: 1rem;
+}
+
+.fs-expertise-check-btn{
+    font-family: 'DMSans-Medium', serif;
+    background: #fff;
+    color: #01a862;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -moz-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+}
+
+.fs-expertise-check-btn-check{
+    font-family: 'DMSans-Medium', serif;
+    background: #1e3932;
+    color: #fff;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -moz-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+}
+
+.fs-expertise-check-btn i{
+    color: #efefef;
+    font-size: 23px;
+}
+
+.fs-expertise-check-btn-check i{
+    color: #01a862;
+    background: white;
+    border-radius: 50%;
+    font-size: 23px;
+}
+
+.fs-arrow-btn {
+    font-family: 'DMSans-Medium', serif;
+    background-color: #007549;
+    border: 1px solid #007549;
+    padding: 10px 40px 10px 18px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.fs-arrow-btn:hover {
+    font-family: 'DMSans-Medium', serif;
+    background-color: #007549;
+    border: 1px solid #007549;
+    padding: 10px 40px 10px 18px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.btn-text {
+    margin-right: 18px;
+}
+
+
 .fs-login-title{
 
 }
