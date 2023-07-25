@@ -287,7 +287,64 @@ h1{
     margin-right: 18px;
 }
 
+.fs-primary-color{
+    color: #01a862;
+}
 
-.fs-login-title{
+.has-search .form-control {
+    padding-left: 2.375rem;
+    border-radius: 25px;
+}
 
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #007549;
+}
+
+.skills-main{
+    background: url("../images/7bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 110vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.fs-skills-btn {
+    font-family: 'DMSans-Medium', serif;
+    background-color: #1e3932;
+    border: 1px solid #1e3932;
+    padding: 15px 40px 15px 18px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.fs-skills-btn:hover {
+    font-family: 'DMSans-Medium', serif;
+    background-color: #1e3932;
+    border: 1px solid #1e3932;
+    padding: 15px 40px 15px 18px;
+    font-size: calc(0.7rem + 1vw);
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.fs-skills-next-btn{
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    color: #01a862;
+    box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -moz-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
 }
