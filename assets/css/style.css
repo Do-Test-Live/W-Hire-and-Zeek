@@ -122,6 +122,20 @@ h1{
     color: #b9b9b9;
 }
 
+.fs-registration-control{
+    font-family: 'DMSans-Medium', serif;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    padding: 0 0;
+    border: 1px solid #c5d7cf;
+}
+
+.fs-registration-control::placeholder{
+    font-family: 'DMSans-Medium', serif;
+    text-align: center;
+    color: #b9b9b9;
+}
+
 .fs-select-control{
     font-family: 'DMSans-Medium', serif;
     background-color: #f8f8f8;
@@ -348,3 +362,35 @@ h1{
     -webkit-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
     -moz-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
 }
+
+.registration-main{
+    background: url("../images/9bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 105vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.fs-user-panel{
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    background: white;
+    border-radius: 25px;
+    color: #01a862;
+    box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+    -moz-box-shadow: 0 3px 5px 0 rgba(5, 132, 87, 0.23);
+}
+
+.fs-user-panel .fa-user{
+    font-size: 80px;
+}
+
+.fs-registration-label{
+    font-family: 'DMSans-Medium', serif;
+    font-weight: bold;
+    color: #01a862;
+}
+
