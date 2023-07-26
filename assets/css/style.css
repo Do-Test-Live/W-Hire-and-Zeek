@@ -391,6 +391,55 @@ h1{
 .fs-registration-label{
     font-family: 'DMSans-Medium', serif;
     font-weight: bold;
-    color: #01a862;
+    color: #007549;
 }
 
+.fs-next-button{
+    background: #d6d6d6;
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+    color: #acacac;
+}
+
+.fixed-bottom{
+    max-width: 520px;
+    margin: auto;
+    align-items: center;
+    bottom: 20px;
+}
+
+.fs-bottom-primary{
+    background: #01a862;
+    border: 1px solid #01a862;
+    border-radius: 20px;
+    color: #ffffff;
+    font-family: 'DMSans-Medium', serif;
+    font-size: 15px;
+}
+
+.fs-bottom-primary:hover{
+    background: #01a862;
+    border: 1px solid #01a862;
+    border-radius: 20px;
+    color: #ffffff;
+    font-family: 'DMSans-Medium', serif;
+    font-size: 15px;
+}
+
+.fs-bottom-secondary{
+    background: #d6d6d6;
+    border: 1px solid #d6d6d6;
+    border-radius: 20px;
+    color: #acacac;
+    font-family: 'DMSans-Medium', serif;
+    font-size: 15px;
+}
+
+.fs-bottom-secondary:hover{
+    background: #d6d6d6;
+    border: 1px solid #d6d6d6;
+    border-radius: 20px;
+    color: #acacac;
+    font-family: 'DMSans-Medium', serif;
+    font-size: 15px;
+}
