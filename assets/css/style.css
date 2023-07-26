@@ -394,6 +394,15 @@ h1{
     color: #007549;
 }
 
+.fs-sms-verification{
+    background: url("../images/10bg.webp") no-repeat;
+    background-size: cover;
+
+    height: 100vh;
+    max-width: 520px;
+    margin: auto;
+}
+
 .fs-next-button{
     background: #d6d6d6;
     border: 1px solid #d6d6d6;
