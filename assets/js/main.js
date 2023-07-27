@@ -1,3 +1,4 @@
+/*
 function isDesktop() {
     const userAgent = navigator.userAgent;
     return !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent));
@@ -12,4 +13,4 @@ function showAlertForDesktop() {
 // Check if the user is browsing from a desktop device and show the alert
 if (isDesktop()) {
     showAlertForDesktop();
-}
+}*/

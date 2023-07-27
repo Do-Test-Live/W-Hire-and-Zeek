@@ -613,7 +613,7 @@ h1{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .heading-banner{
@@ -666,5 +666,27 @@ h1{
     border-radius: 30px;
     margin-bottom: 20px;
     margin-left: 80px;
+    color: #ffffff;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    color: #007549;
+    background-color: #fff0;
+    border-color: #007549;
+}
+
+.nav-link{
+    color: #dddddd;
+}
+
+.card-sub-heading{
+    font-family: DMSans-Medium, sans-serif;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.card-heading{
+    font-family: DMSans-Bold, sans-serif;
+    font-size: 20px;
     color: #ffffff;
 }
