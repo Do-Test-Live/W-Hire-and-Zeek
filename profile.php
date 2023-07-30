@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+if (!isset($_SESSION['userid'])) {
+    header("Location: login.php");
+}
+$userId = $_SESSION['userid'];
+
+$fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,6 +20,7 @@
     <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -22,10 +36,10 @@
                         <div class="col-6 text-center">
                             <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
                             <h5>
-                                Jack
+                                <?php echo $fetch_user[0]['customer_name'];?>
                             </h5>
                             <p>
-                                @jack
+                                @<?php echo $fetch_user[0]['customer_name'];?>
                             </p>
                         </div>
                         <div class="col-3 text-end">
@@ -153,9 +167,11 @@
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </div>
                     <div class="col-8">
-                        <p>
-                            Logout
-                        </p>
+                        <a href="logout.php" style="text-decoration: none; color: #01a862;">
+                            <p>
+                                Logout
+                            </p>
+                        </a>
                     </div>
                     <div class="col-3 text-end">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -195,6 +211,8 @@
 <script src="assets/vendor/Bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
+<script src="assets/vendor/toastr/js/toastr.min.js" type="text/javascript"></script>
+<script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

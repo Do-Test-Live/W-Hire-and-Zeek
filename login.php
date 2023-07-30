@@ -1,3 +1,28 @@
+<?php
+session_start();
+require_once ('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+if(isset($_POST['login'])){
+    $email = $db_handle->checkValue($_POST['email']);
+    $password = $db_handle->checkValue($_POST['password']);
+    $log_in = $db_handle->runQuery("select * from customer where email = '$email' and password = '$password'");
+    $log_in_no = $db_handle->numRows("select * from customer where email = '$email' and password = '$password'");
+    if($log_in_no == 1){
+        $_SESSION['userid'] = $log_in[0]["id"];
+        echo "<script>
+                document.cookie = 'alert = 1;';
+                window.location.href='profile.php';
+                </script>";
+    } else{
+        echo "<script>
+                document.cookie = 'alert = 5;';
+                window.location.href='login.php';
+                </script>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,6 +32,7 @@
     <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -27,15 +53,17 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="mb-3">
-                    <input class="form-control fs-form-control" placeholder="Email or Username" type="email">
-                </div>
-                <div class="mb-4">
-                    <input class="form-control fs-form-control" placeholder="Password" type="password">
-                </div>
-                <div class="mb-3">
-                    <button type="button" class="btn btn-primary fs-lan-primary-btn w-100">Log In</button>
-                </div>
+                <form method="post" action="#">
+                    <div class="mb-3">
+                        <input class="form-control fs-form-control" placeholder="Email or Username" type="email" name="email">
+                    </div>
+                    <div class="mb-4">
+                        <input class="form-control fs-form-control" placeholder="Password" type="password" name="password">
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" name="login" class="btn btn-primary fs-lan-primary-btn w-100">Log In</button>
+                    </div>
+                </form>
                 <div class="mb-3 text-center">
                     <a href="#" class="text-decoration-none text-dark">Forgot password?</a>
                 </div>
@@ -54,6 +82,8 @@
 <script src="assets/vendor/Bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
+<script src="assets/vendor/toastr/js/toastr.min.js" type="text/javascript"></script>
+<script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
