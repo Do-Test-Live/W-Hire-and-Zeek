@@ -71,7 +71,7 @@ if(isset($_POST['login'])){
                     <p class="fs-login-horizonal-line"><span>OR</span></p>
                 </div>
                 <div class="mb-3 mt-4">
-                    <a href="signup.html" class="btn btn-primary fs-secondary-btn w-100">Create an Account</a>
+                    <a href="signup.php" class="btn btn-primary fs-secondary-btn w-100">Create an Account</a>
                 </div>
             </div>
         </div>

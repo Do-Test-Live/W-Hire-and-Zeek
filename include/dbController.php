@@ -9,11 +9,11 @@ class DBController {
     private $conn;
 
     function __construct() {
-        if($_SERVER['SERVER_NAME']=="www.wayshk.ngt.hk"||$_SERVER['SERVER_NAME']=="wayshk.ngt.hk"){
+        if($_SERVER['SERVER_NAME']=="www.hireandzeek.ngt.hk"||$_SERVER['SERVER_NAME']=="hireandzeek.ngt.hk"){
             $this->host = "localhost";
-            $this->user = "u7srwmfa411z5";
-            $this->password = "i6nLwN&~N*";
-            $this->database = "db72eae0bb6d7f";
+            $this->user = "upnb8u5yepuix";
+            $this->password = "+91iexAy61@)";
+            $this->database = "dbybeddfkdftvr";
         }
 
         $this->conn = $this->connectDB();

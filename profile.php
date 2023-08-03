@@ -25,7 +25,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
 </head>
 <body>
 <div class="container-fluid">
-    <div class="fs-sms-verification">
+    <div class="fs-sms-verification pb-5">
         <div class="row pt-5">
             <div class="col-12">
                 <div class="fs-dashboard-alert">
@@ -52,7 +52,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
             </div>
         </div>
         <div class="row login-interface">
-            <div class="col-12 fs-primary-color">
+            <div class="col-12 fs-primary-color pb-5">
                 <div class="row">
                     <div class="col-1">
                         <i class="fa-solid fa-gear"></i>
@@ -162,7 +162,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-5">
                     <div class="col-1">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </div>
