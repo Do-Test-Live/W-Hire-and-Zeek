@@ -71,7 +71,7 @@
                         <input class="form-control fs-form-control" placeholder="Password" id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" name="submit" class="btn btn-primary fs-lan-primary-btn w-100">Create an Account</button>
+                        <button type="submit" name="registration" class="btn btn-primary fs-lan-primary-btn w-100">Create an Account</button>
                     </div>
                 </form>
                 <div id="message">
@@ -94,7 +94,7 @@
                     <button type="button" class="btn btn-primary fs-secondary-btn w-100"><i class="fa-brands fa-apple"></i> Continue with Apple</button>
                 </div>
                 <div class="pt-3 text-center">
-                    <a href="login.html" class="text-decoration-none fs-url">Already have an account?</a> Login
+                    <a href="login.php" class="text-decoration-none fs-url">Already have an account?</a> Login
                 </div>
             </div>
         </div>

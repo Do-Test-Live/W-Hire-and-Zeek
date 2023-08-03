@@ -98,6 +98,13 @@ h1{
     margin: auto;
 }
 
+.job-post-main{
+    background-color: #f8f8f8;
+    height: 115vh;
+    max-width: 520px;
+    margin: auto;
+}
+
 .signup-main{
     background-color: #f8f8f8;
     height: 150vh;

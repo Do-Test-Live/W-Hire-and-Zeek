@@ -36,10 +36,10 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <div class="col-6 text-center">
                             <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
                             <h5>
-                                <?php echo $fetch_user[0]['customer_name'];?>
+                                <?php echo $fetch_user[0]['fname'];?> <?php echo $fetch_user[0]['mname'];?> <?php echo $fetch_user[0]['surname'];?>
                             </h5>
                             <p>
-                                @<?php echo $fetch_user[0]['customer_name'];?>
+                                @<?php echo $fetch_user[0]['fname'];?> <?php echo $fetch_user[0]['mname'];?> <?php echo $fetch_user[0]['surname'];?>
                             </p>
                         </div>
                         <div class="col-3 text-end">
