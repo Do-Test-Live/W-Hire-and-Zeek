@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,22 +69,29 @@
             </div>
         </div>
 
+        <?php
+        $query="SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+        $data = $db_handle->runQuery($query);
+        $row_count = $db_handle->numRows($query);
+        for ($i = 0; $i < $row_count; $i++) {
+        ?>
+
         <div class="row ms-1 me-1">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4" style="padding-left: 0 !important;">
-                        <img alt="..." class="" src="assets/images/12/11.webp">
+                        <img alt="..." class="" src="<?php echo $data[$i]["image"]; ?>">
                     </div>
                     <div class="col-8">
                         <div class="card-body">
-                            <h5 class="card-title">Task Title</h5>
+                            <h5 class="card-title"><?php echo $data[$i]["job_title"]; ?></h5>
                             <p class="card-text"><small class="text-muted"><img alt="Flag of Country"
                                                                                 src="assets/images/12/hk.webp"
-                                                                                style="width: 15px;"> Central, Hong Kong</small>
+                                                                                style="width: 15px;"> <?php echo $data[$i]["address"]; ?></small>
                             </p>
-                            <p class="card-text"><span class="price">$95 HKD</span><small class="text-muted"> per
+                            <p class="card-text"><span class="price">$<?php echo $data[$i]["salary"]; ?> HKD</span><small class="text-muted"> per
                                 hour</small></p>
-                            <p class="card-text"><small class="text-muted">#realestate #rental #central</small></p>
+                            <p class="card-text"><small class="text-muted"><?php echo $data[$i]["keywords"]; ?></small></p>
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -90,60 +103,9 @@
                 </div>
             </div>
         </div>
-        <div class="row ms-1 me-1">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4" style="padding-left: 0 !important;">
-                        <img alt="..." class="" src="assets/images/12/22.webp">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Task Title</h5>
-                            <p class="card-text"><small class="text-muted"><img alt="Flag of Country"
-                                                                                src="assets/images/12/hk.webp"
-                                                                                style="width: 15px;"> Central, Hong Kong</small>
-                            </p>
-                            <p class="card-text"><span class="price">$95 HKD</span><small class="text-muted"> per
-                                hour</small></p>
-                            <p class="card-text"><small class="text-muted">#realestate #rental #central</small></p>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <button class="btn price-button" type="button">Detail</button>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="row ms-1 me-1">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4" style="padding-left: 0 !important;">
-                        <img alt="..." class="" src="assets/images/12/33.webp">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Task Title</h5>
-                            <p class="card-text"><small class="text-muted"><img alt="Flag of Country"
-                                                                                src="assets/images/12/hk.webp"
-                                                                                style="width: 15px;"> Central, Hong Kong</small>
-                            </p>
-                            <p class="card-text"><span class="price">$95 HKD</span><small class="text-muted"> per
-                                hour</small></p>
-                            <p class="card-text"><small class="text-muted">#realestate #rental #central</small></p>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <button class="btn price-button" type="button">Detail</button>
-                            </div>
-                        </div>
-                    </div>
+        <?php } ?>
 
-                </div>
-            </div>
-        </div>
         <div class="row fixed-bottom text-center fs-nav-fixed-bottom">
             <div class="col-2">
                 <i class="fa-solid fa-house"></i>
@@ -157,10 +119,14 @@
                 </div>
             </div>
             <div class="col-2">
-                <i class="fa-solid fa-briefcase"></i>
+                <a href="job-view.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-briefcase"></i>
+                </a>
             </div>
             <div class="col-2">
-                <i class="fa-solid fa-user"></i>
+                <a href="profile.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-user"></i>
+                </a>
             </div>
         </div>
     </div>

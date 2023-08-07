@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <form action="registration.php" method="post">
+                <form action="expertise.php" method="post">
                     <div class="mb-3">
                         <input class="form-control fs-form-control" placeholder="Email or Username" id="email" name="email" type="email" required>
                     </div>
