@@ -65,6 +65,12 @@
             <div class="col-12">
                 <form action="expertise.php" method="post">
                     <div class="mb-3">
+                        <select class="form-select fs-form-control" name="role" aria-label="Default select example" required>
+                            <option value="Applicant">Signup as an Applicant</option>
+                            <option value="Hirer">Signup as a Hirer</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <input class="form-control fs-form-control" placeholder="Email or Username" id="email" name="email" type="email" required>
                     </div>
                     <div class="mb-4">

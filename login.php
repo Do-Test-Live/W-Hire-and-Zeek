@@ -9,11 +9,20 @@ if(isset($_POST['login'])){
     $log_in = $db_handle->runQuery("select * from customer where email = '$email' and password = '$password'");
     $log_in_no = $db_handle->numRows("select * from customer where email = '$email' and password = '$password'");
     if($log_in_no == 1){
+
         $_SESSION['userid'] = $log_in[0]["id"];
-        echo "<script>
+
+        if($log_in[0]["role"]=='Applicant'){
+            echo "<script>
                 document.cookie = 'alert = 1;';
                 window.location.href='profile.php';
                 </script>";
+        }else{
+            echo "<script>
+                document.cookie = 'alert = 1;';
+                window.location.href='job-post.php';
+                </script>";
+        }
     } else{
         echo "<script>
                 document.cookie = 'alert = 5;';
