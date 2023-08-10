@@ -141,6 +141,9 @@ if (isset($_POST['jobPost'])) {
                     <div class="mb-3">
                         <button type="submit" name="jobPost" class="btn btn-primary fs-lan-primary-btn w-100">Submit</button>
                     </div>
+                    <div class="mt-5 text-center">
+                        <a class="text-decoration-none text-dark" href="logout.php">Logout</a>
+                    </div>
                 </form>
             </div>
         </div>

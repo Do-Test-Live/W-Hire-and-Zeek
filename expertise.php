@@ -108,35 +108,42 @@ date_default_timezone_set("Asia/Hong_Kong");
                         if (isset($_POST['registration'])) {
                             $email = $db_handle->checkValue($_POST['email']);
                             $password = $db_handle->checkValue($_POST['password']);
+                            $code = $db_handle->checkValue($_POST['code']);
+                            $one = $db_handle->checkValue($_POST['one']);
+                            $two = $db_handle->checkValue($_POST['two']);
+                            $three = $db_handle->checkValue($_POST['three']);
+                            $four = $db_handle->checkValue($_POST['four']);
 
                             $fetch_customer = $db_handle->runQuery("select * from customer where email = '$email'");
                             $fetch_customer_no = $db_handle->numRows("select * from customer where email = '$email'");
 
-
-                            if($fetch_customer_no==0){
-                                if ($_POST['role'] == 'Hirer') {
-                                    $role = $db_handle->checkValue($_POST['role']);
-                                    $inserted_at = date('Y-m-d h:i:s');
-
-                                    $query = "INSERT INTO `customer`( `email`, `password`, `role`,  `inserted_at`) VALUES ('$email','$password','$role','$inserted_at')";
-
-                                    $insert = $db_handle->insertQuery($query);
-
-                                    if ($insert) {
-                                        echo "<script>
-                                            document.cookie = 'alert = 6;';
-                                            window.location.href='login.php';
-                                            </script>";
-                                    }
-                                }
-                            }else{
+                            $new_code = $one . $two . $three . $four;
+                            if ($code != $new_code) {
                                 echo "<script>
-                                            alert('Email already registered.');
+                                            alert('Code not match. Please put email again.');
                                             window.location.href='signup.php';
                                             </script>";
                             }
-                        }else{
-                        ?>
+
+
+                            if ($_POST['role'] == 'Hirer') {
+                                $role = $db_handle->checkValue($_POST['role']);
+                                $inserted_at = date('Y-m-d h:i:s');
+
+                                $query = "INSERT INTO `customer`( `email`, `password`, `role`,  `inserted_at`) VALUES ('$email','$password','$role','$inserted_at')";
+
+                                $insert = $db_handle->insertQuery($query);
+
+                                if ($insert) {
+                                    echo "<script>
+                                            document.cookie = 'alert = 6;';
+                                            window.location.href='login.php';
+                                            </script>";
+                                }
+                            }
+
+                        } else {
+                            ?>
                             <script>
                                 window.location.href = 'signup.php';
                             </script>
