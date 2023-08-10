@@ -42,6 +42,21 @@ if (isset($_POST['submit'])) {
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+    <style>
+        /* Apply padding to the input field */
+        .form-control[type="date"] {
+            padding-left: 10px; /* Adjust the padding as needed */
+            padding-right: 10px; /* Adjust the padding as needed */
+        }
+
+        /* Adjust the padding for the month and day parts of the input */
+        .form-control[type="date"]::-webkit-inner-spin-button,
+        .form-control[type="date"]::-webkit-clear-button,
+        .form-control[type="date"]::-webkit-calendar-picker-indicator {
+            padding: 0; /* Reset padding for these elements */
+        }
+
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -71,45 +86,55 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-6 pe-2">
-                                <input class="form-control fs-form-control" name="surname" placeholder="Surname"
+                            <div class="col-6 pe-1">
+                                <input class="form-control fs-form-control" name="fname" placeholder="First name"
                                        type="text" required/>
                             </div>
                             <div class="col-6 ps-1">
-                                <input class="form-control fs-form-control" name="fname" placeholder="First name"
+                                <input class="form-control fs-form-control" name="surname" placeholder="Last Name"
                                        type="text" required/>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <!--<div class="mb-3">
                         <div class="row">
                             <div class="col-6 pe-1">
                                 <input class="form-control fs-form-control" placeholder="Middle name" name="mname"
                                        type="text"/>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-6 pe-1">
+                            <div class="col-12 mt-3">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label class="fs-registration-label">Gender</label>
                                     </div>
-                                    <div class="col-8">
-                                        <input class="form-control fs-registration-control" name="gender"
-                                               placeholder="M/F" type="text" required/>
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Male" name="gender" id="flexRadioDefault1" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Female" name="gender" id="flexRadioDefault2">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Female
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 ps-1">
+                            <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-6">
                                         <label class="fs-registration-label">Date of birth</label>
                                     </div>
                                     <div class="col-6">
                                         <input class="form-control fs-registration-control" name="dob"
-                                               placeholder="YY/MM/DD" type="text" required/>
+                                               type="date" required/>
                                     </div>
                                 </div>
                             </div>
@@ -132,12 +157,12 @@ if (isset($_POST['submit'])) {
                     ?>
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-6 pe-1">
+                            <div class="col-12">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label class="fs-registration-label">Region</label>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-6">
                                         <input class="form-control fs-registration-control" name="region" placeholder=""
                                                type="text" required/>
                                     </div>
@@ -146,7 +171,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="mt-5 pt-5">
-                        <button type="submit" name="submit" class="btn btn-secondary fs-next-button w-100">Submit
+                        <button type="submit" name="submit" class="btn btn-secondary fs-lan-primary-btn w-100">Submit
                         </button>
                     </div>
                 </form>

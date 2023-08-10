@@ -102,32 +102,39 @@ date_default_timezone_set("Asia/Hong_Kong");
                 </div>
                 <div class="mb-3 mt-5 pt-5 text-center">
                     <form action="registration.php" method="post">
-                        <?php
-                        if (isset($_POST['registration'])) {
-                        if ($_POST['role'] == 'Hirer') {
-
-                            $email = $db_handle->checkValue($_POST['email']);
-                            $password = $db_handle->checkValue($_POST['password']);
-                            $role = $db_handle->checkValue($_POST['role']);
-                            $inserted_at = date('Y-m-d h:i:s');
-
-                            $query = "INSERT INTO `customer`( `email`, `password`, `role`,  `inserted_at`) VALUES ('$email','$password','$role','$inserted_at')";
-
-                            $insert = $db_handle->insertQuery($query);
-
-                        if ($insert) {
-                            echo "<script>
-                                            document.cookie = 'alert = 6;';
-                                            window.location.href='login.php';
-                                            </script>";
-                        }
-                        else {
-                            ?>
                         <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" required/>
                         <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>" required/>
                         <?php
-                        }
-                        }
+                        if (isset($_POST['registration'])) {
+                            $email = $db_handle->checkValue($_POST['email']);
+                            $password = $db_handle->checkValue($_POST['password']);
+
+                            $fetch_customer = $db_handle->runQuery("select * from customer where email = '$email'");
+                            $fetch_customer_no = $db_handle->numRows("select * from customer where email = '$email'");
+
+
+                            if($fetch_customer_no==0){
+                                if ($_POST['role'] == 'Hirer') {
+                                    $role = $db_handle->checkValue($_POST['role']);
+                                    $inserted_at = date('Y-m-d h:i:s');
+
+                                    $query = "INSERT INTO `customer`( `email`, `password`, `role`,  `inserted_at`) VALUES ('$email','$password','$role','$inserted_at')";
+
+                                    $insert = $db_handle->insertQuery($query);
+
+                                    if ($insert) {
+                                        echo "<script>
+                                            document.cookie = 'alert = 6;';
+                                            window.location.href='login.php';
+                                            </script>";
+                                    }
+                                }
+                            }else{
+                                echo "<script>
+                                            alert('Email already registered.');
+                                            window.location.href='signup.php';
+                                            </script>";
+                            }
                         }else{
                         ?>
                             <script>

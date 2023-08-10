@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <form action="expertise.php" method="post">
+                <form action="verification.php" method="post">
                     <div class="mb-3">
                         <select class="form-select fs-form-control" name="role" aria-label="Default select example" required>
                             <option value="Applicant">Signup as an Applicant</option>
@@ -100,7 +100,7 @@
                     <button type="button" class="btn btn-primary fs-secondary-btn w-100"><i class="fa-brands fa-apple"></i> Continue with Apple</button>
                 </div>
                 <div class="pt-3 text-center">
-                    <a href="login.php" class="text-decoration-none fs-url">Already have an account?</a> Login
+                    <span class="text-decoration-none fs-url">Already have an account?</span> <a class="text-decoration-none text-dark" href="login.php">Login</a>
                 </div>
             </div>
         </div>

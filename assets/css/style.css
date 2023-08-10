@@ -227,8 +227,6 @@ h1{
 .expertise-main{
     background: url("../images/7bg.webp") no-repeat;
     background-size: cover;
-
-    height: 120vh;
     max-width: 520px;
     margin: auto;
 }
@@ -373,8 +371,6 @@ h1{
 .registration-main{
     background: url("../images/9bg.webp") no-repeat;
     background-size: cover;
-
-    height: 105vh;
     max-width: 520px;
     margin: auto;
 }
@@ -697,3 +693,12 @@ h1{
     font-size: 20px;
     color: #ffffff;
 }
+.form-check-input:checked{
+    background-color: #89d4b4 !important;
+    border-color: #89d4b4 !important;
+}
+
+.form-control{
+    color: #9E9E9E;
+}
+

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Verification Page - Hire & Zeek</title>
+    <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
+    <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="fs-verification-2">
+        <div class="row pt-5 login-interface">
+            <div class="col-12">
+                <div class="mt-5">
+                    <h3 class="fs-lan-title mt-5 text-center">
+                        Verification Code
+                    </h3>
+                </div>
+                <div class="text-center mt-5 mb-4">
+                    <img alt="" class="img-fluid fs-mobile" src="assets/images/reset.webp"/>
+                </div>
+                <p class="fs-lan-caption mt-3 mb-4 text-center">
+                    Please type the verification <br/>
+                    code sent to
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="mb-5">
+                    <div class="row">
+                        <div class="col-3 ps-2 pe-2">
+                            <input class="form-control fs-form-control" placeholder="" type="text">
+                        </div>
+                        <div class="col-3 ps-2 pe-2">
+                            <input class="form-control fs-form-control" placeholder="" type="text">
+                        </div>
+                        <div class="col-3 ps-2 pe-2">
+                            <input class="form-control fs-form-control" placeholder="" type="text">
+                        </div>
+                        <div class="col-3 ps-2 pe-2">
+                            <input class="form-control fs-form-control" placeholder="" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <a href="username.html" class="btn btn-primary fs-lan-primary-btn w-100">Verify</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="assets/vendor/Bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
+<script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
