@@ -142,10 +142,36 @@ if (isset($_POST['submit'])) {
                     </div>
                     <?php
                     if (isset($_POST['registration'])) {
+
+                        $email = $db_handle->checkValue($_POST['email']);
+                        $password = $db_handle->checkValue($_POST['password']);
+                        $code = $db_handle->checkValue($_POST['code']);
+                        $one = $db_handle->checkValue($_POST['one']);
+                        $two = $db_handle->checkValue($_POST['two']);
+                        $three = $db_handle->checkValue($_POST['three']);
+                        $four = $db_handle->checkValue($_POST['four']);
+
+                        $fetch_customer = $db_handle->runQuery("select * from customer where email = '$email'");
+                        $fetch_customer_no = $db_handle->numRows("select * from customer where email = '$email'");
+
+                        $new_code = $one . $two . $three . $four;
+                        if ($code != $new_code) {
+                            echo "<script>
+                                            alert('Code not match. Please put email again.');
+                                            window.location.href='signup.php';
+                                            </script>";
+                        }
+
+                        if($fetch_customer_no>0){
+                            echo "<script>
+                                        alert('Email already registered.');
+                                        window.location.href='signup.php';
+                                    </script>";
+                        }
+
                         ?>
                     <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" required/>
                     <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>" required/>
-                    <input type="hidden" name="keywords" value="<?php echo $_POST['keywords']; ?>" required/>
                     <?php
                     }else{
                     ?>

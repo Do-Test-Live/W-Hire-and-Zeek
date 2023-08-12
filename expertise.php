@@ -125,21 +125,11 @@ date_default_timezone_set("Asia/Hong_Kong");
                                             </script>";
                             }
 
-
-                            if ($_POST['role'] == 'Hirer') {
-                                $role = $db_handle->checkValue($_POST['role']);
-                                $inserted_at = date('Y-m-d h:i:s');
-
-                                $query = "INSERT INTO `customer`( `email`, `password`, `role`,  `inserted_at`) VALUES ('$email','$password','$role','$inserted_at')";
-
-                                $insert = $db_handle->insertQuery($query);
-
-                                if ($insert) {
-                                    echo "<script>
-                                            document.cookie = 'alert = 6;';
-                                            window.location.href='login.php';
+                            if($fetch_customer_no>0){
+                                echo "<script>
+                                            alert('Email already registered.');
+                                            window.location.href='signup.php';
                                             </script>";
-                                }
                             }
 
                         } else {

@@ -15,11 +15,13 @@
             position: relative;
             padding: 20px;
             margin-top: 10px;
+            font-size:10px;
         }
 
         #message p {
-            padding: 10px 35px;
-            font-size: 18px;
+            padding: 10px 10px;
+            font-size: 10px;
+            margin:unset;
         }
 
         /* Add a green text color and a checkmark when the requirements are right */
@@ -31,6 +33,7 @@
             position: relative;
             left: -35px;
             content: "✔";
+            font-size: 10px;
         }
 
         /* Add a red text color and an "x" when the requirements are wrong */
@@ -42,6 +45,7 @@
             position: relative;
             left: -35px;
             content: "✖";
+            font-size: 10px;
         }
     </style>
 </head>
@@ -65,12 +69,6 @@
             <div class="col-12">
                 <form action="verification.php" method="post">
                     <div class="mb-3">
-                        <select class="form-select fs-form-control" name="role" aria-label="Default select example" required>
-                            <option value="Applicant">Signup as an Applicant</option>
-                            <option value="Hirer">Signup as a Hirer</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
                         <input class="form-control fs-form-control" placeholder="Email or Username" id="email" name="email" type="email" required>
                     </div>
                     <div class="mb-4">
@@ -81,7 +79,7 @@
                     </div>
                 </form>
                 <div id="message">
-                    <h3>Password must contain the following:</h3>
+                    <h6>Password must contain the following:</h6>
                     <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                     <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                     <p id="number" class="invalid">A <b>number</b></p>

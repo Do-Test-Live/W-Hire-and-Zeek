@@ -129,10 +129,9 @@ if (isset($_POST['registration'])) {
                             </p>
                         </div>
                         <div class="col-12">
-                            <form action="expertise.php" method="post">
+                            <form action="registration.php" method="post">
                                 <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" required/>
                                 <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>" required/>
-                                <input type="hidden" name="role" value="<?php echo $_POST['role']; ?>" required/>
                                 <input type="hidden" name="code" value="<?php echo $code; ?>" required/>
                                 <div class="mb-5">
                                     <div class="row">

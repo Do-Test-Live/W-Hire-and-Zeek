@@ -13,4 +13,5 @@ function showAlertForDesktop() {
 // Check if the user is browsing from a desktop device and show the alert
 if (isDesktop()) {
     showAlertForDesktop();
-}*/
+}
+*/

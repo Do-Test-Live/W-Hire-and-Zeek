@@ -338,24 +338,26 @@ h1{
 
 .fs-skills-btn {
     font-family: 'DMSans-Medium', serif;
-    background-color: #1e3932;
+    background-color: #89d4b4;
     border: 1px solid #1e3932;
     padding: 15px 40px 15px 18px;
     font-size: calc(0.7rem + 1vw);
     border-radius: 15px;
     text-align: left;
     position: relative;
+    color: #000000;
 }
 
 .fs-skills-btn:hover {
     font-family: 'DMSans-Medium', serif;
-    background-color: #1e3932;
     border: 1px solid #1e3932;
+    background-color: #1e3932;
     padding: 15px 40px 15px 18px;
     font-size: calc(0.7rem + 1vw);
     border-radius: 15px;
     text-align: left;
     position: relative;
+    color: white;
 }
 
 .fs-skills-next-btn{
