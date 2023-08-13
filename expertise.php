@@ -101,40 +101,24 @@ date_default_timezone_set("Asia/Hong_Kong");
                     </button>
                 </div>
                 <div class="mb-3 mt-5 pt-5 text-center">
-                    <form action="registration.php" method="post">
+                    <form action="skills.php" method="post">
+                        <?php
+                        if (isset($_POST['registration'])) {
+                            ?>
+                        <input type="hidden" name="username" value="<?php echo $_POST['username']; ?>" required/>
+                        <input type="hidden" name="fname" value="<?php echo $_POST['fname']; ?>" required/>
+                        <input type="hidden" name="surname" value="<?php echo $_POST['surname']; ?>" required/>
+                        <input type="hidden" name="gender" value="<?php echo $_POST['gender']; ?>" required/>
+                        <input type="hidden" name="dob" value="<?php echo $_POST['dob']; ?>" required/>
+                        <input type="hidden" name="region" value="<?php echo $_POST['region']; ?>" required/>
                         <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" required/>
                         <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>" required/>
                         <?php
-                        if (isset($_POST['registration'])) {
-                            $email = $db_handle->checkValue($_POST['email']);
-                            $password = $db_handle->checkValue($_POST['password']);
-                            $code = $db_handle->checkValue($_POST['code']);
-                            $one = $db_handle->checkValue($_POST['one']);
-                            $two = $db_handle->checkValue($_POST['two']);
-                            $three = $db_handle->checkValue($_POST['three']);
-                            $four = $db_handle->checkValue($_POST['four']);
-
-                            $fetch_customer = $db_handle->runQuery("select * from customer where email = '$email'");
-                            $fetch_customer_no = $db_handle->numRows("select * from customer where email = '$email'");
-
-                            $new_code = $one . $two . $three . $four;
-                            if ($code != $new_code) {
-                                echo "<script>
-                                            alert('Code not match. Please put email again.');
-                                            window.location.href='signup.php';
-                                            </script>";
-                            }
-
-                            if($fetch_customer_no>0){
-                                echo "<script>
-                                            alert('Email already registered.');
-                                            window.location.href='signup.php';
-                                            </script>";
-                            }
 
                         } else {
                             ?>
                             <script>
+                                alert('Invalid page');
                                 window.location.href = 'signup.php';
                             </script>
                             <?php

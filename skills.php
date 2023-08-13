@@ -1,3 +1,39 @@
+<?php
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+if (isset($_POST['submit'])) {
+
+    $username = $db_handle->checkValue($_POST['username']);
+    $email = $db_handle->checkValue($_POST['email']);
+    $password = $db_handle->checkValue($_POST['password']);
+    $surname = $db_handle->checkValue($_POST['surname']);
+    $fname = $db_handle->checkValue($_POST['fname']);
+    $dob = $db_handle->checkValue($_POST['dob']);
+    $gender = $db_handle->checkValue($_POST['gender']);
+    $region = $db_handle->checkValue($_POST['region']);
+    $keywords = $db_handle->checkValue($_POST['keywords']);
+    $job_category= $db_handle->checkValue($_POST['job_category']);
+    $inserted_at = date('Y-m-d h:i:s');
+
+
+    $query = "INSERT INTO `customer`(`fname`,  `surname`,`username`, `email`, `password`, `dob`, `gender`, `region`, `keywords`, `job_category`, `inserted_at`) VALUES ('$fname','$surname','$username','$email','$password','$dob','$gender','$region','$keywords','$job_category','$inserted_at')";
+
+    $insert = $db_handle->insertQuery($query);
+
+    if ($insert) {
+        echo "<script>
+                document.cookie = 'alert = 6;';
+                window.location.href='login.php';
+                </script>";
+    } else {
+        echo "<script>
+                document.cookie = 'alert = 5;';
+                window.location.href='login.php';
+                </script>";
+    }
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -75,6 +111,29 @@
                 </div>
                 <hr/>
                 <form action="" method="post">
+                    <?php
+                    if (isset($_POST['registration'])) {
+                        ?>
+                    <input type="hidden" name="username" value="<?php echo $_POST['username']; ?>" required/>
+                    <input type="hidden" name="fname" value="<?php echo $_POST['fname']; ?>" required/>
+                    <input type="hidden" name="surname" value="<?php echo $_POST['surname']; ?>" required/>
+                    <input type="hidden" name="gender" value="<?php echo $_POST['gender']; ?>" required/>
+                    <input type="hidden" name="dob" value="<?php echo $_POST['dob']; ?>" required/>
+                    <input type="hidden" name="region" value="<?php echo $_POST['region']; ?>" required/>
+                    <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" required/>
+                    <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>" required/>
+                    <input type="hidden" name="keywords" value="<?php echo $_POST['keywords']; ?>" required/>
+                    <?php
+
+                    } else {
+                    ?>
+                        <script>
+                            alert('Invalid page');
+                            window.location.href = 'signup.php';
+                        </script>
+                        <?php
+                    }
+                    ?>
                     <input type="hidden" id="selectedValues" name="job_category" required>
                     <div class="mb-3 mt-5">
                         <div class="row">

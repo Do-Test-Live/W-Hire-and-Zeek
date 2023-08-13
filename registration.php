@@ -2,35 +2,6 @@
 require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
-if (isset($_POST['submit'])) {
-    $email = $db_handle->checkValue($_POST['email']);
-    $password = $db_handle->checkValue($_POST['password']);
-    $surname = $db_handle->checkValue($_POST['surname']);
-    $fname = $db_handle->checkValue($_POST['fname']);
-    $mname = $db_handle->checkValue($_POST['mname']);
-    $dob = $db_handle->checkValue($_POST['dob']);
-    $gender = $db_handle->checkValue($_POST['gender']);
-    $region = $db_handle->checkValue($_POST['region']);
-    $keywords = $db_handle->checkValue($_POST['keywords']);
-    $inserted_at = date('Y-m-d h:i:s');
-
-
-    $query = "INSERT INTO `customer`(`fname`, `mname`, `surname`, `email`, `password`, `dob`, `gender`, `region`, `inserted_at`) VALUES ('$fname','$mname','$surname','$email','$password','$dob','$gender','$region','$inserted_at')";
-
-    $insert = $db_handle->insertQuery($query);
-
-    if ($insert) {
-        echo "<script>
-                document.cookie = 'alert = 6;';
-                window.location.href='login.php';
-                </script>";
-    } else {
-        echo "<script>
-                document.cookie = 'alert = 5;';
-                window.location.href='login.php';
-                </script>";
-    }
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -75,7 +46,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div class="col-12">
-                <form action="" method="post">
+                <form action="username.php" method="post">
                     <div class="mb-3">
                         <h3 class="fs-lan-title mt-3">
                             What is your name?
@@ -176,6 +147,7 @@ if (isset($_POST['submit'])) {
                     }else{
                     ?>
                         <script>
+                            alert('Invalid Page');
                             window.location.href = 'signup.php';
                         </script>
                         <?php
