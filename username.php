@@ -18,7 +18,11 @@
                     <img alt="" class="img-fluid" src="assets/images/logo.webp"/>
                 </div>
                 <div class="text-center mt-5 mb-3">
-                    <img alt="" class="img-fluid" src="assets/images/j.webp" style="max-width: 80px"/>
+                    <div class="text-center mt-5 mb-3 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center align-items-center fs-username-first">
+                            <h1>J</h1>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-5">
                     <h3 class="fs-lan-title mt-3 text-center">
@@ -75,5 +79,41 @@
 <script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#usernameInput').on('keyup keydown', function() {
+            let inputUsername = $(this).val();
+            if (inputUsername.trim() !== '') {
+                $.ajax({
+                    type: 'POST',
+                    url: 'check_availability.php',
+                    data: { username: inputUsername,fname:<?php echo $_POST['fname']; ?>,lname: <?php echo $_POST['surname']; ?> },
+                    dataType: 'json',
+                    success: function(data) {
+                        displaySuggestions(data.suggestions);
+                    }
+                });
+            } else {
+                $('#suggestions').empty();
+            }
+        });
+
+        function displaySuggestions(suggestions) {
+            let suggestionsDiv = $('#suggestions');
+            suggestionsDiv.empty();
+
+            if (suggestions.length > 0) {
+                suggestionsDiv.append('<p>Suggested usernames:</p>');
+                let ul = $('<ul>');
+                suggestions.forEach(function(username) {
+                    ul.append('<li>' + username + '</li>');
+                });
+                suggestionsDiv.append(ul);
+            } else {
+                suggestionsDiv.append('<p>No suggestions available.</p>');
+            }
+        }
+    });
+</script>
 </body>
 </html>
