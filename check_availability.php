@@ -21,5 +21,18 @@ function generateUsername($firstName, $lastName)
     return $username;
 }
 
+$usernamevalid = array();
+
+if(isset($username)){
+    $query="SELECT * FROM customer where username='$username'";
+    $row_count = $db_handle->numRows($query);
+
+    if($row_count>0){
+        $usernamevalid[] = 'notvalid';
+    }else{
+        $usernamevalid[] = 'valid';
+    }
+}
+
 // Encode and output username suggestions as JSON
-echo json_encode(array('suggestions' => $usernameSuggestions));
+echo json_encode(array('suggestions' => $usernameSuggestions,'usernamevalid' => $usernamevalid));

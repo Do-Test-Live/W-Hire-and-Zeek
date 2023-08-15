@@ -20,13 +20,13 @@
                 <div class="text-center mt-5 mb-3">
                     <div class="text-center mt-5 mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center align-items-center fs-username-first">
-                            <h1>J</h1>
+                            <h1><?php echo substr($_POST['fname'], 0, 1); ?></h1>
                         </div>
                     </div>
                 </div>
                 <div class="mt-5">
                     <h3 class="fs-lan-title mt-3 text-center">
-                        Welcome Jack!
+                        Welcome <?php echo $_POST['fname']; ?>!
                     </h3>
                     <p class="fs-lan-caption mt-3 mb-4">
                         Please not that a username cannot be changed once chosen
@@ -56,16 +56,16 @@
                     }
                     ?>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" name="username" placeholder="Username" type="text" required>
+                        <input class="form-control fs-form-control" id="usernameInput" name="username"
+                               placeholder="Username" required type="text">
                     </div>
                     <div class="mb-5">
-                        <p>
-                            <span class="fs-url">Suggestions:</span> Jack <span class="fs-url">/</span> Jack9 <span
-                                    class="fs-url">/</span> Jack09
-                        </p>
+                        <div id="suggestions">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" name="registration" class="btn btn-primary fs-lan-primary-btn w-100">Next
+                        <button class="btn btn-primary fs-lan-primary-btn w-100" disabled name="registration"
+                                type="submit" id="registration">Next
                         </button>
                     </div>
                 </form>
@@ -80,8 +80,8 @@
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#usernameInput').on('keyup keydown', function() {
+    $(document).ready(function () {
+        $('#usernameInput').on('keyup keydown', function () {
             let inputUsername = $(this).val();
             if (inputUsername.trim() !== '') {
                 $.ajax({
@@ -89,8 +89,14 @@
                     url: 'check_availability.php',
                     data: { username: inputUsername,fname:<?php echo $_POST['fname']; ?>,lname: <?php echo $_POST['surname']; ?> },
                     dataType: 'json',
-                    success: function(data) {
+                    success: function (data) {
                         displaySuggestions(data.suggestions);
+
+                        if(data.usernamevalid=='valid'){
+                            $('#registration').prop("disabled",false);
+                        }else{
+                            $('#registration').prop("disabled",true);
+                        }
                     }
                 });
             } else {
@@ -103,14 +109,11 @@
             suggestionsDiv.empty();
 
             if (suggestions.length > 0) {
-                suggestionsDiv.append('<p>Suggested usernames:</p>');
-                let ul = $('<ul>');
-                suggestions.forEach(function(username) {
-                    ul.append('<li>' + username + '</li>');
-                });
-                suggestionsDiv.append(ul);
+                let suggestionsText = '<span class="fs-url">Suggestions:</span> ';
+                suggestionsText += suggestions.join(' <span class="fs-url">/</span> ');
+                suggestionsDiv.html('<p>' + suggestionsText + '</p>');
             } else {
-                suggestionsDiv.append('<p>No suggestions available.</p>');
+                suggestionsDiv.empty();
             }
         }
     });
