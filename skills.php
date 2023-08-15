@@ -143,8 +143,8 @@ if (isset($_POST['submit'])) {
                                 </p>
                             </div>
                             <div class="col-6 text-end">
-                                <button type="submit" class="btn btn-outline-success fs-skills-next-btn">
-                                    Next
+                                <button type="submit" name="submit" class="btn btn-outline-success fs-skills-next-btn">
+                                    Submit
                                 </button>
                             </div>
                         </div>
