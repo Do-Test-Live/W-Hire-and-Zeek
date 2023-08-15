@@ -512,7 +512,7 @@ h1 {
 
 .fs-dashboard-earn-btn-text {
     margin-top: 0.5rem;
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -606,8 +606,10 @@ h1 {
 
 .fs-dashboard-money {
     background: url(../images/11/1.webp) no-repeat;
-    background-size: contain;
-    padding: 10px;
+    background-size: cover;
+    padding: 1rem;
+    height: 78px;
+    width: 80%;
 }
 
 .fs-dashboard-money p {

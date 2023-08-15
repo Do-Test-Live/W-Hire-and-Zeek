@@ -140,23 +140,33 @@
             </div>
         </div>
     </div>
-    <div class="row fixed-bottom text-center fs-nav-fixed-bottom" style="margin-top: 100px">
+    <div class="row fixed-bottom text-center fs-nav-fixed-bottom">
         <div class="col-2">
-            <i class="fa-solid fa-house"></i>
+            <a href="dashboard.php" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-house"></i>
+            </a>
         </div>
         <div class="col-2">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="search.php" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
         <div class="col-4">
-            <div class="fs-plus-circle d-flex justify-content-center align-items-center text-white">
-                <i class="fa-solid fa-plus fa-3x"></i>
-            </div>
+            <a href="job-post.php" class="text-decoration-none text-dark">
+                <div class="fs-plus-circle d-flex justify-content-center align-items-center text-white">
+                    <i class="fa-solid fa-plus fa-3x"></i>
+                </div>
+            </a>
         </div>
         <div class="col-2">
-            <i class="fa-solid fa-briefcase"></i>
+            <a href="jobs.php" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-briefcase fs-primary-color"></i>
+            </a>
         </div>
         <div class="col-2">
-            <i class="fa-solid fa-user"></i>
+            <a href="profile.php" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-user"></i>
+            </a>
         </div>
     </div>
 </div>

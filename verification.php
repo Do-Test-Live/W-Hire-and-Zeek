@@ -43,7 +43,7 @@ if (isset($_POST['registration'])) {
                 <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;'>
                     <table align='center' border='0' cellpadding='0' cellspacing='0' width='600' style='border-collapse: collapse; background-color: #ffffff;'>
                         <tr>
-                            <td align='center' bgcolor='#3498db' style='padding: 20px 0;'>
+                            <td align='center' bgcolor='#007549' style='padding: 20px 0;'>
                                 <h1 style='color: #ffffff;'>Verify Your Email</h1>
                             </td>
                         </tr>
@@ -52,14 +52,14 @@ if (isset($_POST['registration'])) {
                                 <p>Hello,</p>
                                 <p>Thank you for signing up! To complete your registration, please click the button below to verify your email address:</p>
                                 <p style='text-align: center;'>
-                                    <a href='#' style='display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 5px;'>Verify Email with this code: $code
-                                    </a>
+                                    <span style='display: inline-block; padding: 10px 20px; background-color: #007549; color: #ffffff; text-decoration: none; border-radius: 5px;'>Verify Email with this code: $code
+                                    </span>
                                 </p>
                                 <p>If you didn't sign up for this account, you can ignore this email.</p>
                             </td>
                         </tr>
                         <tr>
-                            <td align='center' bgcolor='#3498db' style='padding: 20px;'>
+                            <td align='center' bgcolor='#007549' style='padding: 20px;'>
                                 <p style='color: #ffffff; margin: 0;'>If you have any questions, please contact our support team.</p>
                             </td>
                         </tr>

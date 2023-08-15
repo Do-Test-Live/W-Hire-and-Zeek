@@ -1,3 +1,15 @@
+<?php
+session_start();
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+if (!isset($_SESSION['userid'])) {
+    header("Location: login.php");
+}
+$userId = $_SESSION['userid'];
+
+$fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,18 +29,18 @@
                 <div class="alert alert-warning alert-dismissible fade show fs-dashboard-alert" role="alert">
                     <div class="row">
                         <div class="col-1">
-                            <i class="fa-solid fa-envelope text-white fa-2x"></i>
+                            <i class="fa-solid fa-phone text-white fa-2x"></i>
                         </div>
                         <div class="col-11 text-white">
-                            <strong>Email verification required</strong><br/>
-                            To activate your account, please click "Verify your email adrdess" on the email we sent to
-                            chandan@gmail.com
+                            <strong>Phone verification required</strong><br/>
+                            To activate your account, please click verify and go to verification page and verify your
+                            phone number.
                             <button aria-label="Close" class="btn-close text-white" data-bs-dismiss="alert"
                                     type="button"></button>
 
                             <div class="text-end mb-2">
                                 <a class="btn fs-btn-resend mt-2" href="#">
-                                    Resend Email
+                                    Verify
                                 </a>
                             </div>
                         </div>
@@ -46,37 +58,41 @@
                         <h2 class="fs-dashboard-title">
                             <span>20,283.00</span> HKD
                         </h2>
-                        <p class="mt-5 fs-dashboard-custom">
+                        <p class="mt-5 fs-dashboard-custom text-center">
                             This month you have earned
                         </p>
                     </div>
                     <div class="col-12">
+                        <div class="fs-dashboard-money mx-auto">
+                            <p>
+                                <strong>Cashback</strong><br/>
+                                37.45 HKD
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
                         <div class="row">
-                            <div class="col-6 p-2">
-                                <div class="fs-dashboard-money">
-                                    <p>
-                                        <strong>Cashback</strong><br/>
-                                        37.45 HKD
-                                    </p>
+                            <div class="col-11 mx-auto">
+                                <div class="row">
+                                    <div class="col-3 mx-auto">
+                                        <img alt="" class="img-fluid p-2" src="assets/images/11/2.webp"/>
+                                        <p class="fs-dashboard-earn-btn-text">
+                                            Set Limit
+                                        </p>
+                                    </div>
+                                    <div class="col-3 mx-auto">
+                                        <img alt="" class="img-fluid p-2" src="assets/images/11/3.webp"/>
+                                        <p class="fs-dashboard-earn-btn-text">
+                                            Add Money
+                                        </p>
+                                    </div>
+                                    <div class="col-3 mx-auto">
+                                        <img alt="" class="img-fluid p-2" src="assets/images/11/4.webp"/>
+                                        <p class="fs-dashboard-earn-btn-text">
+                                            Withdraw
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <img alt="" class="img-fluid p-2" src="assets/images/11/2.webp"/>
-                                <p class="fs-dashboard-earn-btn-text">
-                                    Set Limit
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <img alt="" class="img-fluid p-2" src="assets/images/11/3.webp"/>
-                                <p class="fs-dashboard-earn-btn-text">
-                                    Add Money
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <img alt="" class="img-fluid p-2" src="assets/images/11/4.webp"/>
-                                <p class="fs-dashboard-earn-btn-text">
-                                    Withdraw
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -149,21 +165,31 @@
         </div>
         <div class="row fixed-bottom text-center fs-nav-fixed-bottom">
             <div class="col-2">
-                <i class="fa-solid fa-house"></i>
+                <a href="dashboard.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-house fs-primary-color"></i>
+                </a>
             </div>
             <div class="col-2">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <a href="search.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
             </div>
             <div class="col-4">
-                <div class="fs-plus-circle d-flex justify-content-center align-items-center text-white">
-                    <i class="fa-solid fa-plus fa-3x"></i>
-                </div>
+                <a href="job-post.php" class="text-decoration-none text-dark">
+                    <div class="fs-plus-circle d-flex justify-content-center align-items-center text-white">
+                        <i class="fa-solid fa-plus fa-3x"></i>
+                    </div>
+                </a>
             </div>
             <div class="col-2">
-                <i class="fa-solid fa-briefcase"></i>
+                <a href="jobs.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-briefcase"></i>
+                </a>
             </div>
             <div class="col-2">
-                <i class="fa-solid fa-user"></i>
+                <a href="profile.php" class="text-decoration-none text-dark">
+                    <i class="fa-solid fa-user"></i>
+                </a>
             </div>
         </div>
     </div>
