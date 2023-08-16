@@ -120,6 +120,30 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 </div>
+                <?php
+                $fetch_company = $db_handle->runQuery("select * from company where customer_id = '$userId'");
+                if(isset($fetch_company)){
+                    ?>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-12 mt-3 mb-2">
+                            <h5 class="text-center">Company Profile</h5>
+                        </div>
+                        <div class="col-1">
+                            <i class="fa-solid fa-business-time"></i>
+                        </div>
+                        <div class="col-8">
+                            <p>
+                                <?php echo $fetch_company[0]['name']; ?>
+                            </p>
+                        </div>
+                        <div class="col-3 text-end">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
                 <hr/>
                 <div class="row">
                     <div class="col-1">

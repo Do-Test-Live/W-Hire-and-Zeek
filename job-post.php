@@ -27,10 +27,14 @@ if (isset($_POST['jobPost'])) {
     $contact = $db_handle->checkValue($_POST['contact']);
     $keywords = $db_handle->checkValue($_POST['keywords']);
 
+    $company = $db_handle->runQuery("SELECT * FROM `company` WHERE customer_id = '$userId'");
+
+    $company_id=$company[0]['id'];
+
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `job_post`(`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('2','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
+    $query = "INSERT INTO `job_post`(`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$company_id','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
