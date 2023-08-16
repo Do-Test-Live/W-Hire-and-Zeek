@@ -181,6 +181,30 @@ if (x == 7) {
     eraseCookie('alert');
 }
 
+if (x == 8) {
+    toastr.success("Company Create Successful", "Successful", {
+        timeOut: 3000,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        positionClass: "toast-bottom-right",
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        iconClass: "toast-success",
+        tapToDismiss: !1
+    })
+
+    eraseCookie('alert');
+}
+
 
 function eraseCookie(name) {
     document.cookie = name + '=;';

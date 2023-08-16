@@ -9,51 +9,59 @@ if (!isset($_SESSION['userid'])) {
 }
 $userId = $_SESSION['userid'];
 
-$company = $db_handle->numRows("SELECT * FROM `company` WHERE customer_id = '$userId'");
 
-if($company==0){
-    echo "<script>
-                alert('Create Company profile First for post Job.');
+if (isset($_POST['companyProfile'])) {
+    $company_title = $db_handle->checkValue($_POST['company_title']);
+    $keywords = $db_handle->checkValue($_POST['keywords']);
+
+    $image = '';
+    if (!empty($_FILES['company_image']['name'])) {
+        $RandomAccountNumber = mt_rand(1, 99999);
+        $file_name = $RandomAccountNumber . "_" . $_FILES['company_image']['name'];
+        $file_size = $_FILES['company_image']['size'];
+        $file_tmp  = $_FILES['company_image']['tmp_name'];
+
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
+            $attach_files = '';
+            echo "<script>
+                document.cookie = 'alert = 5;';
                 window.location.href='company-profile.php';
                 </script>";
-}
 
-if (isset($_POST['jobPost'])) {
-    $job_title = $db_handle->checkValue($_POST['job_title']);
-    $job_description = $db_handle->checkValue($_POST['job_description']);
-    $salary = $db_handle->checkValue($_POST['salary']);
-    $job_type = $db_handle->checkValue($_POST['job_type']);
-    $address = $db_handle->checkValue($_POST['address']);
-    $contact = $db_handle->checkValue($_POST['contact']);
-    $keywords = $db_handle->checkValue($_POST['keywords']);
+        } else {
+            move_uploaded_file($file_tmp, "assets/images/company/" . $file_name);
+            $image = "assets/images/company/" . $file_name;
+        }
+    }
+
 
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `job_post`(`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('2','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
+    $query = "INSERT INTO `company`(`customer_id`, `name`, `image`, `keywords`, `inserted_at`) VALUES ('$userId','$company_title','$image','$keywords','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
     if ($insert) {
         echo "<script>
-                document.cookie = 'alert = 7;';
-                window.location.href='job-post.php';
+                document.cookie = 'alert = 8;';
+                window.location.href='profile.php';
                 </script>";
     } else {
         echo "<script>
                 document.cookie = 'alert = 5;';
-                window.location.href='job-post.php';
+                window.location.href='company-profile.php';
                 </script>";
     }
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Job Post- Hire & Zeek</title>
+    <title>Company Profile - Hire & Zeek</title>
     <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
@@ -70,29 +78,22 @@ if (isset($_POST['jobPost'])) {
                 </div>
                 <div class="mt-5">
                     <h3 class="fs-lan-title mt-3 mb-4">
-                        Job Post
+                        Company Profile
                     </h3>
                 </div>
             </div>
             <div class="col-12">
-                <form method="post" action="">
+                <form method="post" action="" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Job Title" type="text" name="job_title" required>
+                        <input class="form-control fs-form-control" placeholder="Company Title" type="text"
+                               name="company_title" required>
                     </div>
                     <div class="mb-3">
-                        <textarea class="form-control fs-form-control" name="job_description" placeholder="Job Description..." rows="4" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Salary/Rate" type="number" name="salary" required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Job type" type="text" name="job_type" required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Address" type="text" name="address" required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact" type="text" name="contact" required>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Company Image (250X250) Size</label>
+                            <input class="form-control" type="file" name="company_image" id="formFile"
+                                   accept="image/png, image/jpeg, image/jpg" required>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
@@ -154,7 +155,8 @@ if (isset($_POST['jobPost'])) {
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" name="jobPost" class="btn btn-primary fs-lan-primary-btn w-100">Submit</button>
+                        <button type="submit" name="companyProfile" class="btn btn-primary fs-lan-primary-btn w-100">Submit
+                        </button>
                     </div>
                 </form>
             </div>
@@ -233,11 +235,7 @@ if (isset($_POST['jobPost'])) {
             }
         }
 
-        if (buttonTexts.length > 2) {
-            alert("You can select up to three keywords. Currently selected: " + buttonTexts.length);
-        } else {
-            updateInputValue();
-        }
+        updateInputValue();
     }
 
     function updateInputValue() {

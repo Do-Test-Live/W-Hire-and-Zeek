@@ -3,6 +3,10 @@ session_start();
 require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
+if (!isset($_SESSION['userid'])) {
+    header("Location: login.php");
+}
+$userId = $_SESSION['userid'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
