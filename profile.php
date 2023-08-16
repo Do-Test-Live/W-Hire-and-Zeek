@@ -25,7 +25,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
 </head>
 <body>
 <div class="container-fluid">
-    <div class="fs-sms-verification pb-5">
+    <div class="fs-profile pb-5">
         <div class="row pt-5">
             <div class="col-12">
                 <div class="fs-dashboard-alert">
@@ -70,12 +70,12 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                     <div class="col-1">
                         <i class="fa-solid fa-circle-dollar-to-slot"></i>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <p>
                             Balance
                         </p>
                     </div>
-                    <div class="col-3 text-end">
+                    <div class="col-4 text-end">
                         <p>
                             $0.00 HKD
                         </p>
@@ -136,16 +136,36 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                 </div>
                 <div class="row">
                     <div class="col-1">
-                        <i class="fa-solid fa-globe"></i>
+                        <p class="mt-3">
+                            <i class="fa-solid fa-globe"></i>
+                        </p>
                     </div>
-                    <div class="col-8">
-                        <p>
+                    <div class="col-7">
+                        <p class="mt-3">
                             Language
                         </p>
                     </div>
-                    <div class="col-3 text-end">
+                    <div class="col-4 text-end">
                         <select class="form-select fs-select-control" aria-label="Default select example">
                             <option selected>English</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-2">
+                    <div class="col-1">
+                        <p class="mt-3">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p class="mt-3">
+                            Select Mode
+                        </p>
+                    </div>
+                    <div class="col-5 text-end">
+                        <select class="form-select fs-select-control" aria-label="Default select example">
+                            <option selected>Applicant</option>
+                            <option>Hirer</option>
                         </select>
                     </div>
                 </div>

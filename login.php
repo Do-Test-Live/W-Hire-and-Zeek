@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
         if($log_in[0]["role"]=='Applicant'){
             echo "<script>
                 document.cookie = 'alert = 1;';
-                window.location.href='profile.php';
+                window.location.href='dashboard.php';
                 </script>";
         }else{
             echo "<script>
