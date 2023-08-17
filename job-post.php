@@ -34,7 +34,7 @@ if (isset($_POST['jobPost'])) {
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `job_post`(`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$company_id','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
+    $query = "INSERT INTO `job_post`(`customer_id`,`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$userId','$company_id','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
@@ -66,7 +66,7 @@ if (isset($_POST['jobPost'])) {
 </head>
 <body>
 <div class="container-fluid">
-    <div class="job-post-main">
+    <div class="job-post-main pb-5">
         <div class="row pt-5 login-interface">
             <div class="col-12">
                 <div class="text-center">
@@ -90,7 +90,12 @@ if (isset($_POST['jobPost'])) {
                         <input class="form-control fs-form-control" placeholder="Salary/Rate" type="number" name="salary" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Job type" type="text" name="job_type" required>
+                        <select class="form-select fs-form-control" aria-label="Default select example" name="job_type" required>
+                            <option value="Full-Time" selected>Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Project Based">Project Based</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <input class="form-control fs-form-control" placeholder="Address" type="text" name="address" required>

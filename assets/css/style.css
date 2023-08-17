@@ -124,7 +124,6 @@ h1 {
 
 .job-post-main {
     background-color: #f8f8f8;
-    height: 180vh;
     max-width: 520px;
     margin: auto;
 }
@@ -572,6 +571,16 @@ h1 {
 
 }
 
+.fs-button-apply{
+    background: #01a862;
+    border: 1px solid #01a862;
+    border-radius: 20px;
+    color: #ffffff;
+    font-family: 'DMSans-Medium', serif;
+    font-size: 15px;
+    padding: 2px 35px;
+}
+
 .fs-fixed-bottom {
     max-width: 520px;
     margin: auto;
@@ -586,6 +595,11 @@ h1 {
     box-shadow: 0 -3px 5px 0 rgba(5, 132, 87, 0.23);
     padding-top: 25px;
     padding-bottom: 5px;
+}
+
+.fs-nav-apply{
+    max-width: 520px;
+    margin: auto;
 }
 
 .fs-plus-circle {
