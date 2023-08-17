@@ -161,7 +161,7 @@ date_default_timezone_set("Asia/Hong_Kong");
                 </div>
             </div>
         </div>
-        <div class="row fixed-bottom text-cente fs-nav-apply">
+        <div class="row fixed-bottom text-center fs-nav-apply">
             <div class="col-12">
                 <div style="background: rgba(255,255,255,0.85);border-top: 5px solid rgba(0,148,14,0.3);">
                     <div class="row pt-3 pb-3 ps-2 pe-2">

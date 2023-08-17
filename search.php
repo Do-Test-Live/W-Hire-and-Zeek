@@ -18,6 +18,37 @@ $userId = $_SESSION['userid'];
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+    <style>
+        .checked {
+            color: #059d00;
+        }
+
+        .modal-header {
+            position: relative;
+            background: #1e3932;
+        }
+
+        .card-checkbox,
+        .card-heart {
+            position: absolute;
+            top: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .card-checkbox {
+            left: 15px;
+            top: 19px;
+        }
+
+        .card-heart {
+            right: 10px;
+            color: #f5f5f5;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -75,7 +106,7 @@ $userId = $_SESSION['userid'];
             </div>
 
             <?php
-            $query="SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
             $data = $db_handle->runQuery($query);
             $row_count = $db_handle->numRows($query);
             for ($i = 0; $i < $row_count; $i++) {
@@ -84,23 +115,35 @@ $userId = $_SESSION['userid'];
                 <div class="row ms-1 me-1">
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
-                            <div class="col-4" style="padding-left: 0 !important;">
-                                <img alt="..." class="" src="<?php echo $data[$i]["image"]; ?>">
+                            <div class="col-4 p-2 d-flex justify-content-center align-items-center"
+                                 style="background: #383b40;">
+                                <div>
+                                    <img alt="..." class="img-fluid" src="<?php echo $data[$i]["image"]; ?>"
+                                         style="border: 3px solid white;border-radius: 15px;">
+                                    <p class="text-white text-center mt-2"
+                                       style="font-family: 'DMSans-Bold', serif;"><?php echo $data[$i]["name"]; ?></p>
+                                </div>
                             </div>
                             <div class="col-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $data[$i]["job_title"]; ?></h5>
                                     <p class="card-text"><small class="text-muted"><img alt="Flag of Country"
                                                                                         src="assets/images/12/hk.webp"
-                                                                                        style="width: 15px;"> <?php echo $data[$i]["address"]; ?></small>
+                                                                                        style="width: 15px;"> <?php echo $data[$i]["address"]; ?>
+                                        </small>
                                     </p>
-                                    <p class="card-text"><span class="price">$<?php echo $data[$i]["salary"]; ?> HKD</span><small class="text-muted"> per
+                                    <p class="card-text"><span
+                                                class="price">$<?php echo $data[$i]["salary"]; ?> HKD</span><small
+                                                class="text-muted"> per
                                             hour</small></p>
-                                    <p class="card-text"><small class="text-muted"><?php echo $data[$i]["keywords"]; ?></small></p>
+                                    <p class="card-text"><small
+                                                class="text-muted"><?php echo $data[$i]["keywords"]; ?></small></p>
                                 </div>
                                 <div class="row">
                                     <div class="col-4">
-                                        <button class="btn price-button" type="button">Detail</button>
+                                        <button class="btn price-button" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">Detail
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -139,6 +182,59 @@ $userId = $_SESSION['userid'];
                         <i class="fa-solid fa-user"></i>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center align-items-center">
+                <a href="#" class="text-decoration-none text-white card-checkbox" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-chevron-left"></i></a>
+                <button class="card-heart"><i class="fas fa-heart"></i></button>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="assets/images/company/38426_ad.png" class="img-fluid" alt=""
+                             style="border: 3px solid white;border-radius: 15px;"/>
+                    </div>
+                    <div class="col-12">
+                        <h1 class="text-center text-white mt-3" style="font-family: 'DMSans-Bold', serif;">Magnus</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h2 class="text-center">Project Manager</h2>
+                <p>
+                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                    essentially unchanged.
+                </p>
+                <div>
+                    <p>
+                        <span class="badge text-bg-success">Salary/Rate:</span> $95 HKD per hour
+                    </p>
+                    <p>
+                        <span class="badge text-bg-success">Job type:</span> Full-Time/Part-Time
+                    </p>
+                    <p>
+                        <span class="badge text-bg-success">Address:</span> Central, Hong Kong
+                    </p>
+                    <p>
+                        <span class="badge text-bg-success">Contact:</span> +852 **** ****
+                    </p>
+                    <p>
+                        <span class="badge text-bg-success">Rating:</span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: unset">
+                <button type="button" class="btn btn-success fs-button-apply">Apply</button>
             </div>
         </div>
     </div>
