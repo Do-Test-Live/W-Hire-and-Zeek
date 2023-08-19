@@ -3,6 +3,48 @@ session_start();
 require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
+
+if (!isset($_SESSION['userid'])) {
+    header("Location: login.php");
+}
+$userId = $_SESSION['userid'];
+
+if (isset($_POST['apply'])) {
+    $job_id = $_POST['job_post'];
+    $inserted_at = date('Y-m-d h:i:s');
+
+    if ($job_id != '') {
+        $array = explode(', ', $job_id);
+        foreach ($array as $value) //loop over values
+        {
+            $query = "INSERT INTO `job_apply`(`job_id`, `customer_id`, `inserted_at`) VALUES ('$value','$userId','$inserted_at')";
+            $data = $db_handle->insertQuery($query);
+        }
+
+        echo "<script>
+                alert('Job Applied');
+                window.location.href='jobs.php';
+                </script>";
+    } else {
+        echo "<script>
+                alert('Job not selected');
+                window.location.href='jobs.php';
+                </script>";
+    }
+}
+
+if(isset($_POST['favourite'])){
+    $job_id = $_POST['job_id'];
+    $inserted_at = date('Y-m-d h:i:s');
+
+    $query = "INSERT INTO `favorite`( `customer_id`, `job_id`, `inserted_at`) VALUES ('$userId','$job_id','$inserted_at')";
+    $data = $db_handle->insertQuery($query);
+    echo "<script>
+                alert('Favourite added');
+                window.location.href='jobs.php';
+                </script>";
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +161,7 @@ date_default_timezone_set("Asia/Hong_Kong");
                         <li class="nav-item" role="presentation" style="width: 100px">
                             <a aria-controls="tab3" aria-selected="false" class="nav-link" data-bs-toggle="tab"
                                href="#tab3"
-                               id="tab3-tab" role="tab">Recently Viewed</a>
+                               id="tab3-tab" role="tab">Applied Job</a>
                         </li>
                     </ul>
 
@@ -128,34 +170,120 @@ date_default_timezone_set("Asia/Hong_Kong");
                         <div aria-labelledby="tab1-tab" class="tab-pane fade show active" id="tab1" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query="SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
-                                ?>
-                                <div class="col-6 mt-3">
-                                    <div class="card">
-                                        <input type="checkbox" class="card-checkbox" value="<?php echo $data[$i]["id"]; ?>">
-                                        <div class="p-3">
-                                            <img alt="" class="card-img-top fs-job-card-img"
-                                                 src="<?php echo $data[$i]["image"]; ?>">
-                                             <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["name"]; ?></p>
+
+                                    $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
+
+                                    if ($apply_job == 0) {
+                                        ?>
+                                        <div class="col-6 mt-3">
+                                            <div class="card">
+                                                <input type="checkbox" class="card-checkbox"
+                                                       value="<?php echo $data[$i]["id"]; ?>">
+                                                <div class="p-3">
+                                                    <img alt="" class="card-img-top fs-job-card-img"
+                                                         src="<?php echo $data[$i]["image"]; ?>">
+                                                    <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["name"]; ?></p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
+                                                    <p class="card-text"><small
+                                                                class="text-muted">$<?php echo $data[$i]["salary"]; ?>
+                                                            HKD/hr</small></p>
+                                                    <?php
+                                                    $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+                                                    ?>
+                                                    <form action="" method="post">
+                                                        <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
+                                                        <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart <?php if($favourite==1) echo 'text-danger'; ?>"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
-                                            <p class="card-text"><small class="text-muted">$<?php echo $data[$i]["salary"]; ?> HKD/hr</small></p>
-                                            <button class="card-heart"><i class="fas fa-heart"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php } ?>
+                                        <?php
+                                    }
+                                } ?>
                             </div>
                         </div>
                         <div aria-labelledby="tab2-tab" class="tab-pane fade" id="tab2" role="tabpanel">
+                            <?php
+                            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                            $data = $db_handle->runQuery($query);
+                            $row_count = $db_handle->numRows($query);
+                            for ($i = 0; $i < $row_count; $i++) {
 
+                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
+                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+
+                                if ($apply_job == 0 && $favourite==1) {
+                                    ?>
+                                    <div class="col-6 mt-3">
+                                        <div class="card">
+                                            <input type="checkbox" class="card-checkbox"
+                                                   value="<?php echo $data[$i]["id"]; ?>">
+                                            <div class="p-3">
+                                                <img alt="" class="card-img-top fs-job-card-img"
+                                                     src="<?php echo $data[$i]["image"]; ?>">
+                                                <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["name"]; ?></p>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
+                                                <p class="card-text"><small
+                                                            class="text-muted">$<?php echo $data[$i]["salary"]; ?>
+                                                        HKD/hr</small></p>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
+                                                    <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart text-danger"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } ?>
                         </div>
                         <div aria-labelledby="tab3-tab" class="tab-pane fade" id="tab3" role="tabpanel">
+                            <?php
+                            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                            $data = $db_handle->runQuery($query);
+                            $row_count = $db_handle->numRows($query);
+                            for ($i = 0; $i < $row_count; $i++) {
 
+                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
+                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+
+                                if ($apply_job == 1) {
+                                    ?>
+                                    <div class="col-6 mt-3">
+                                        <div class="card">
+                                            <input type="checkbox" class="card-checkbox"
+                                                   value="<?php echo $data[$i]["id"]; ?>">
+                                            <div class="p-3">
+                                                <img alt="" class="card-img-top fs-job-card-img"
+                                                     src="<?php echo $data[$i]["image"]; ?>">
+                                                <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["name"]; ?></p>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
+                                                <p class="card-text"><small
+                                                            class="text-muted">$<?php echo $data[$i]["salary"]; ?>
+                                                        HKD/hr</small></p>
+                                                <?php
+                                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+                                                ?>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
+                                                    <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart <?php if($favourite==1) echo 'text-danger'; ?>"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } ?>
                         </div>
                     </div>
                 </div>
@@ -169,7 +297,11 @@ date_default_timezone_set("Asia/Hong_Kong");
                             0 selected task
                         </div>
                         <div class="col-5 text-end">
-                            <button type="button" class="btn btn-success fs-button-apply">Apply</button>
+                            <form action="" method="post">
+                                <input type="hidden" id="job_post" name="job_post" required>
+                                <button type="submit" class="btn btn-success fs-button-apply" name="apply">Apply
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -226,6 +358,8 @@ date_default_timezone_set("Asia/Hong_Kong");
                 resultDisplay.textContent = `${selectedCount} selected task`;
 
                 const selectedValues = Array.from(selectedCheckboxes).map(cb => cb.value);
+                document.getElementById("job_post").value = selectedValues.join(', ');
+
                 console.log(`Selected option values: ${selectedValues.join(', ')}`);
             });
         });
