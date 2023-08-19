@@ -78,35 +78,56 @@ $userId = $_SESSION['userid'];
             </div>
             <div class="row text-center mt-3" style="margin: 0 25px;">
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/3.webp">
+                    <a href="search.php?job_type=Full-Time">
+                        <img class="icons" alt="" src="assets/images/12/3.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/4.webp">
+                    <a href="search.php?job_type=Part-Time">
+                        <img class="icons" alt="" src="assets/images/12/4.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/2.webp">
+                    <a href="search.php?job_type=Freelance">
+                        <img class="icons" alt="" src="assets/images/12/2.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/1.webp">
+                    <a href="search.php?job_type=Project-Based">
+                        <img class="icons" alt="" src="assets/images/12/1.webp"/>
+                    </a>
                 </div>
             </div>
             <div class="row text-center" style="margin: 0 25px;">
                 <div class="col-3">
-                    <p class="icon-text">Full-Time</p>
+                    <a class="text-decoration-none" href="search.php?job_type=Full-Time">
+                        <p class="icon-text text-dark">Full-Time</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Part-Time</p>
+                    <a class="text-decoration-none" href="search.php?job_type=Part-Time">
+                        <p class="icon-text text-dark">Part-Time</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Freelance</p>
+                    <a class="text-decoration-none" href="search.php?job_type=Freelance">
+                        <p class="icon-text text-dark">Freelance</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Project Based</p>
+                    <a class="text-decoration-none" href="search.php?job_type=Project-Based">
+                        <p class="icon-text text-dark">Project Based</p>
+                    </a>
                 </div>
             </div>
 
             <?php
-            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+            $query_add_on='';
+            if(isset($_GET['job_type'])){
+                $query_add_on=" and j.job_type='{$_GET['job_type']}'";
+            }
+
+            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id".$query_add_on." order by j.id desc";
             $data = $db_handle->runQuery($query);
             $row_count = $db_handle->numRows($query);
             for ($i = 0; $i < $row_count; $i++) {
