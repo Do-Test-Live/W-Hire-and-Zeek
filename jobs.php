@@ -33,14 +33,14 @@ if (isset($_POST['apply'])) {
     }
 }
 
-if(isset($_POST['favourite'])){
+if (isset($_POST['favourite'])) {
     $job_id = $_POST['job_id'];
     $inserted_at = date('Y-m-d h:i:s');
 
     $query = "INSERT INTO `favorite`( `customer_id`, `job_id`, `inserted_at`) VALUES ('$userId','$job_id','$inserted_at')";
     $data = $db_handle->insertQuery($query);
     echo "<script>
-                alert('Favourite added');
+                alert('Favourite Changed');
                 window.location.href='jobs.php';
                 </script>";
 
@@ -117,30 +117,46 @@ if(isset($_POST['favourite'])){
             </div>
             <div class="row text-center mt-3" style="margin: 0 25px;">
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/3.webp">
+                    <a href="jobs.php?job_type=Full-Time">
+                        <img class="icons" alt="" src="assets/images/12/3.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/4.webp">
+                    <a href="jobs.php?job_type=Part-Time">
+                        <img class="icons" alt="" src="assets/images/12/4.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/2.webp">
+                    <a href="jobs.php?job_type=Freelance">
+                        <img class="icons" alt="" src="assets/images/12/2.webp"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <img class="icons" src="assets/images/12/1.webp">
+                    <a href="jobs.php?job_type=Project-Based">
+                        <img class="icons" alt="" src="assets/images/12/1.webp"/>
+                    </a>
                 </div>
             </div>
             <div class="row text-center" style="margin: 0 25px;">
                 <div class="col-3">
-                    <p class="icon-text">Full-Time</p>
+                    <a class="text-decoration-none" href="jobs.php?job_type=Full-Time">
+                        <p class="icon-text text-dark">Full-Time</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Part-Time</p>
+                    <a class="text-decoration-none" href="jobs.php?job_type=Part-Time">
+                        <p class="icon-text text-dark">Part-Time</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Freelance</p>
+                    <a class="text-decoration-none" href="jobs.php?job_type=Freelance">
+                        <p class="icon-text text-dark">Freelance</p>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <p class="icon-text">Project Based</p>
+                    <a class="text-decoration-none" href="jobs.php?job_type=Project-Based">
+                        <p class="icon-text text-dark">Project Based</p>
+                    </a>
                 </div>
             </div>
 
@@ -170,7 +186,12 @@ if(isset($_POST['favourite'])){
                         <div aria-labelledby="tab1-tab" class="tab-pane fade show active" id="tab1" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                                $query_add_on='';
+                                if(isset($_GET['job_type'])){
+                                    $query_add_on=" and j.job_type='{$_GET['job_type']}'";
+                                }
+
+                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id".$query_add_on." order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -197,8 +218,11 @@ if(isset($_POST['favourite'])){
                                                     $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
                                                     ?>
                                                     <form action="" method="post">
-                                                        <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
-                                                        <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart <?php if($favourite==1) echo 'text-danger'; ?>"></i></button>
+                                                        <input type="hidden" name="job_id"
+                                                               value="<?php echo $data[$i]["id"]; ?>" required>
+                                                        <button type="submit" name="favourite" class="card-heart"><i
+                                                                    class="fas fa-heart <?php if ($favourite%2 == 1) echo 'text-danger'; ?>"></i>
+                                                        </button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -218,7 +242,7 @@ if(isset($_POST['favourite'])){
                                 $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
                                 $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
 
-                                if ($apply_job == 0 && $favourite==1) {
+                                if ($apply_job == 0 && $favourite%2 == 1) {
                                     ?>
                                     <div class="col-6 mt-3">
                                         <div class="card">
@@ -235,8 +259,10 @@ if(isset($_POST['favourite'])){
                                                             class="text-muted">$<?php echo $data[$i]["salary"]; ?>
                                                         HKD/hr</small></p>
                                                 <form action="" method="post">
-                                                    <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
-                                                    <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart text-danger"></i></button>
+                                                    <input type="hidden" name="job_id"
+                                                           value="<?php echo $data[$i]["id"]; ?>" required>
+                                                    <button type="submit" name="favourite" class="card-heart"><i
+                                                                class="fas fa-heart text-danger"></i></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -275,8 +301,11 @@ if(isset($_POST['favourite'])){
                                                 $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
                                                 ?>
                                                 <form action="" method="post">
-                                                    <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>" required>
-                                                    <button type="submit" name="favourite" class="card-heart"><i class="fas fa-heart <?php if($favourite==1) echo 'text-danger'; ?>"></i></button>
+                                                    <input type="hidden" name="job_id"
+                                                           value="<?php echo $data[$i]["id"]; ?>" required>
+                                                    <button type="submit" name="favourite" class="card-heart"><i
+                                                                class="fas fa-heart <?php if ($favourite%2 == 1) echo 'text-danger'; ?>"></i>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>

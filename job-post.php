@@ -94,7 +94,7 @@ if (isset($_POST['jobPost'])) {
                             <option value="Full-Time" selected>Full-Time</option>
                             <option value="Part-Time">Part-Time</option>
                             <option value="Freelance">Freelance</option>
-                            <option value="Project Based">Project Based</option>
+                            <option value="Project-Based">Project Based</option>
                         </select>
                     </div>
                     <div class="mb-3">
