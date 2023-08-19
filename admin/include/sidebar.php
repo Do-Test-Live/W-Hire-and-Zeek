@@ -34,6 +34,20 @@
             <span>User Data</span>
         </a>
     </li>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="jobdata.php">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Job Data</span>
+        </a>
+    </li>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="applydata.php">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Apply Data</span>
+        </a>
+    </li>
 
 </ul>
 <!-- End of Sidebar -->
