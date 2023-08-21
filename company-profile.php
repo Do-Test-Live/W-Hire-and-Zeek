@@ -33,6 +33,8 @@ if (isset($_POST['companyProfile'])) {
             move_uploaded_file($file_tmp, "assets/images/company/" . $file_name);
             $image = "assets/images/company/" . $file_name;
         }
+    }else{
+        $image = "assets/images/company/def.jpg";
     }
 
 
@@ -92,7 +94,7 @@ if (isset($_POST['companyProfile'])) {
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Company Image (250X250) Size</label>
                             <input class="form-control" type="file" name="company_image" id="formFile"
-                                   accept="image/png, image/jpeg, image/jpg" required>
+                                   accept="image/png, image/jpeg, image/jpg">
                         </div>
                     </div>
                     <div class="mb-3">

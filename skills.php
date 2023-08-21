@@ -138,8 +138,8 @@ if (isset($_POST['submit'])) {
                     <div class="mb-3 mt-5">
                         <div class="row">
                             <div class="col-6">
-                                <p class="fs-lan-caption">
-                                    20 skills selected
+                                <p class="fs-lan-caption" id="result">
+                                    0 skills selected
                                 </p>
                             </div>
                             <div class="col-6 text-end">
@@ -163,7 +163,7 @@ if (isset($_POST['submit'])) {
 <script>
     const buttons = document.querySelectorAll('.btn');
     const selectedValuesInput = document.getElementById('selectedValues');
-
+    const resultDisplay = document.getElementById("result");
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             // Toggle selected class for the clicked button
@@ -175,6 +175,9 @@ if (isset($_POST['submit'])) {
             // Get values from selected buttons and update input field
             const selectedValues = Array.from(selectedButtons).map(btn => btn.getAttribute('data-value')).join(', ');
             selectedValuesInput.value = selectedValues;
+
+            const selectedCount = selectedButtons.length;
+            resultDisplay.textContent = `${selectedCount} skills selected`;
         });
     });
 </script>
