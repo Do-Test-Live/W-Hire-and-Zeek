@@ -191,7 +191,7 @@ if (isset($_POST['favourite'])) {
                                     $query_add_on=" and j.job_type='{$_GET['job_type']}'";
                                 }
 
-                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id".$query_add_on." order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where j.customer_id!='$userId' and c.id=j.company_id".$query_add_on." order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -234,13 +234,13 @@ if (isset($_POST['favourite'])) {
                         </div>
                         <div aria-labelledby="tab2-tab" class="tab-pane fade" id="tab2" role="tabpanel">
                             <?php
-                            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id and order by j.id desc";
                             $data = $db_handle->runQuery($query);
                             $row_count = $db_handle->numRows($query);
                             for ($i = 0; $i < $row_count; $i++) {
 
-                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
-                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']} and customer_id='{$userId}'");
+                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']} and customer_id='{$userId}'");
 
                                 if ($apply_job == 0 && $favourite%2 == 1) {
                                     ?>
@@ -278,15 +278,15 @@ if (isset($_POST['favourite'])) {
                             $row_count = $db_handle->numRows($query);
                             for ($i = 0; $i < $row_count; $i++) {
 
-                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']}");
-                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
+                                $apply_job = $db_handle->numRows("select * from job_apply where job_id={$data[$i]['id']} and customer_id='{$userId}'");
+                                $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']} and customer_id='{$userId}'");
 
                                 if ($apply_job == 1) {
                                     ?>
                                     <div class="col-6 mt-3">
                                         <div class="card">
                                             <input type="checkbox" class="card-checkbox"
-                                                   value="<?php echo $data[$i]["id"]; ?>">
+                                                   value="<?php echo $data[$i]["id"]; ?>" disabled>
                                             <div class="p-3">
                                                 <img alt="" class="card-img-top fs-job-card-img"
                                                      src="<?php echo $data[$i]["image"]; ?>">

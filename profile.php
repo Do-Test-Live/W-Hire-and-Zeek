@@ -30,21 +30,13 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
             <div class="col-12">
                 <div class="fs-dashboard-alert">
                     <div class="row text-white p-3">
-                        <div class="col-3">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </div>
-                        <div class="col-6 text-center">
+                        <div class="col-6 text-center mx-auto">
                             <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
                             <h5>
                                 <?php echo $fetch_user[0]['fname']; ?> <?php echo $fetch_user[0]['surname']; ?>
                             </h5>
                             <p>
                                 @<?php echo $fetch_user[0]['username']; ?>
-                            </p>
-                        </div>
-                        <div class="col-3 text-end">
-                            <p>
-                                View Profile
                             </p>
                         </div>
                     </div>

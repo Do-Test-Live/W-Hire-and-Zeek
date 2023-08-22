@@ -41,7 +41,7 @@ if (isset($_POST['jobPost'])) {
     if ($insert) {
         echo "<script>
                 document.cookie = 'alert = 7;';
-                window.location.href='job-post.php';
+                window.location.href='jobs.php';
                 </script>";
     } else {
         echo "<script>
@@ -162,7 +162,7 @@ if (isset($_POST['jobPost'])) {
 
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-5 pb-5">
                         <button type="submit" name="jobPost" class="btn btn-primary fs-lan-primary-btn w-100">Submit</button>
                     </div>
                 </form>
