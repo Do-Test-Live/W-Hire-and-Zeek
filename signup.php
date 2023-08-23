@@ -47,6 +47,24 @@
             content: "✖";
             font-size: 10px;
         }
+
+        .icon-left {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            padding: 10px 10px 10px 20px;
+        }
+
+        .icon-left i {
+            margin-right: 10px;
+        }
+
+        .icon-left span {
+            flex-grow: 1;
+        }
+
+
     </style>
 </head>
 <body>
@@ -89,14 +107,21 @@
                     <p class="fs-login-horizonal-line"><span>OR</span></p>
                 </div>
                 <div class="mb-3 mt-4">
-                    <button type="button" class="btn btn-primary fs-secondary-btn w-100"><i class="fa-brands fa-google"></i> Continue with Gmail</button>
+                    <button type="button" class="btn btn-primary fs-secondary-btn w-100 icon-left">
+                        <i class="fa-brands fa-google"></i> <span>Continue with Gmail</span>
+                    </button>
                 </div>
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary fs-secondary-btn w-100"><i class="fa-brands fa-facebook"></i> Continue with Facebook</button>
+                    <button type="button" class="btn btn-primary fs-secondary-btn w-100 icon-left">
+                        <i class="fa-brands fa-facebook"></i> <span>Continue with Facebook</span>
+                    </button>
                 </div>
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary fs-secondary-btn w-100"><i class="fa-brands fa-apple"></i> Continue with Apple</button>
+                    <button type="button" class="btn btn-primary fs-secondary-btn w-100 icon-left">
+                        <i class="fa-brands fa-apple"></i> <span>Continue with Apple</span>
+                    </button>
                 </div>
+
                 <div class="pt-3 text-center">
                     <span class="text-decoration-none fs-url">Already have an account?</span> <a class="text-decoration-none text-dark" href="login.php">Login</a>
                 </div>

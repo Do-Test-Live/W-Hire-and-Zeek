@@ -130,7 +130,7 @@ h1 {
 
 .signup-main {
     background-color: #f8f8f8;
-    height: 150vh;
+    height: 120vh;
     max-width: 520px;
     margin: auto;
 }
@@ -373,8 +373,8 @@ h1 {
 
 .fs-skills-btn:hover {
     font-family: 'DMSans-Medium', serif;
+    background-color: #89d4b4;
     border: 1px solid #1e3932;
-    background-color: #1e3932;
     padding: 15px 40px 15px 18px;
     font-size: calc(0.7rem + 1vw);
     border-radius: 15px;
@@ -436,6 +436,15 @@ h1 {
     background-size: cover;
 
     height: 125vh;
+    max-width: 520px;
+    margin: auto;
+}
+
+.fs-termsandcondition {
+    background-color: #f8f8f8;
+    background-size: cover;
+
+    height: 100%;
     max-width: 520px;
     margin: auto;
 }

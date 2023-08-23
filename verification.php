@@ -10,7 +10,7 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 if (isset($_POST['registration'])) {
-    $email = $db_handle->checkValue($_POST['email']);
+    $email = strtolower($db_handle->checkValue($_POST['email']));
     $password = $db_handle->checkValue($_POST['password']);
 
     function productCode($length)
@@ -144,16 +144,16 @@ if (isset($_POST['registration'])) {
                                 <div class="mb-5">
                                     <div class="row">
                                         <div class="col-3 ps-2 pe-2">
-                                            <input class="form-control fs-form-control center-align-input" name="one" placeholder="" type="text" required>
+                                            <input class="form-control fs-form-control center-align-input" name="one" maxlength="1" placeholder="" type="text" required>
                                         </div>
                                         <div class="col-3 ps-2 pe-2">
-                                            <input class="form-control fs-form-control center-align-input" name="two" placeholder="" type="text" required>
+                                            <input class="form-control fs-form-control center-align-input" name="two" maxlength="1" placeholder="" type="text" required>
                                         </div>
                                         <div class="col-3 ps-2 pe-2">
-                                            <input class="form-control fs-form-control center-align-input" name="three" placeholder="" type="text" required>
+                                            <input class="form-control fs-form-control center-align-input" name="three" maxlength="1" placeholder="" type="text" required>
                                         </div>
                                         <div class="col-3 ps-2 pe-2">
-                                            <input class="form-control fs-form-control center-align-input" name="four" placeholder="" type="text" required>
+                                            <input class="form-control fs-form-control center-align-input" name="four" maxlength="1" placeholder="" type="text" required>
                                         </div>
                                     </div>
                                 </div>

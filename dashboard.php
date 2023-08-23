@@ -24,8 +24,8 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
 <body>
 <div class="container-fluid">
     <div class="fs-sms-verification">
-        <div class="row pt-5">
-            <div class="col-12">
+        <div class="row">
+            <div class="col-12" style="display: none">
                 <div class="alert alert-warning alert-dismissible fade show fs-dashboard-alert" role="alert">
                     <div class="row">
                         <div class="col-1">

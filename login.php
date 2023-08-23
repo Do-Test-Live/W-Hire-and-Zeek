@@ -4,7 +4,7 @@ require_once ('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
 if(isset($_POST['login'])){
-    $email = $db_handle->checkValue($_POST['email']);
+    $email = strtolower($db_handle->checkValue($_POST['email']));
     $password = $db_handle->checkValue($_POST['password']);
     $log_in = $db_handle->runQuery("select * from customer where email = '$email' and password = '$password'");
     $log_in_no = $db_handle->numRows("select * from customer where email = '$email' and password = '$password'");
@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
         if($log_in[0]["role"]=='Applicant'){
             echo "<script>
                 document.cookie = 'alert = 1;';
-                window.location.href='dashboard.php';
+                window.location.href='jobs.php';
                 </script>";
         }else{
             echo "<script>
@@ -62,7 +62,7 @@ if(isset($_POST['login'])){
                 </div>
             </div>
             <div class="col-12">
-                <form method="post" action="#">
+                <form method="post" action="">
                     <div class="mb-3">
                         <input class="form-control fs-form-control" placeholder="Email or Username" type="email" name="email">
                     </div>

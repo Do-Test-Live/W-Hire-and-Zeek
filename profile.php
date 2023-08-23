@@ -33,7 +33,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <div class="col-6 text-center mx-auto">
                             <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
                             <h5>
-                                <?php echo $fetch_user[0]['fname']; ?> <?php echo $fetch_user[0]['surname']; ?>
+                                <?php echo $fetch_user[0]['fname']; ?><?php echo $fetch_user[0]['surname']; ?>
                             </h5>
                             <p>
                                 @<?php echo $fetch_user[0]['username']; ?>
@@ -114,7 +114,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                 </div>
                 <?php
                 $fetch_company = $db_handle->runQuery("select * from company where customer_id = '$userId'");
-                if(isset($fetch_company)){
+                if (isset($fetch_company)) {
                     ?>
                     <hr/>
                     <div class="row">
@@ -133,7 +133,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
                     </div>
-                <?php
+                    <?php
                 }
                 ?>
                 <hr/>
@@ -142,12 +142,16 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <i class="fa-regular fa-circle-question"></i>
                     </div>
                     <div class="col-8">
-                        <p>
-                            Support
-                        </p>
+                        <a href="mailto:support@hireandzeek.com" style="text-decoration: none; color: #01a862;">
+                            <p>
+                                Support
+                            </p>
+                        </a>
                     </div>
                     <div class="col-3 text-end">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <a href="mailto:support@hireandzeek.com" style="text-decoration: none; color: #01a862;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -190,12 +194,16 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <i class="fa-regular fa-file-lines"></i>
                     </div>
                     <div class="col-8">
-                        <p>
-                            Terms and conditions
-                        </p>
+                        <a href="termsandcondition.php" style="text-decoration: none; color: #01a862;">
+                            <p>
+                                Terms and conditions
+                            </p>
+                        </a>
                     </div>
                     <div class="col-3 text-end">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <a href="termsandcondition.php" style="text-decoration: none; color: #01a862;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="row pb-5">
@@ -210,7 +218,9 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         </a>
                     </div>
                     <div class="col-3 text-end">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <a href="logout.php" style="text-decoration: none; color: #01a862;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </div>
                     <div class="col-8 mt-5 mx-auto text-center">
                         <small>

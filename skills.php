@@ -46,8 +46,8 @@ if (isset($_POST['submit'])) {
     <link href="assets/css/style.css" rel="stylesheet"/>
     <style>
         .selected {
-            background-color: #1e3932;
-            color: #ffffff;
+            background-color: #1e3932 !important;
+            color: #ffffff !important;
         }
     </style>
 </head>
@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-    const buttons = document.querySelectorAll('.btn');
+    const buttons = document.querySelectorAll('.fs-skills-btn');
     const selectedValuesInput = document.getElementById('selectedValues');
     const resultDisplay = document.getElementById("result");
     buttons.forEach(button => {
