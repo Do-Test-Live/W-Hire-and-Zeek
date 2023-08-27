@@ -13,7 +13,7 @@ $company = $db_handle->numRows("SELECT * FROM `company` WHERE customer_id = '$us
 
 if($company==0){
     echo "<script>
-                alert('Create Company profile First for post Job.');
+                alert('Create Hirer profile First for post Job.');
                 window.location.href='company-profile.php';
                 </script>";
 }
@@ -23,6 +23,7 @@ if (isset($_POST['jobPost'])) {
     $job_description = $db_handle->checkValue($_POST['job_description']);
     $salary = $db_handle->checkValue($_POST['salary']);
     $job_type = $db_handle->checkValue($_POST['job_type']);
+    $name = $db_handle->checkValue($_POST['name']);
     $address = $db_handle->checkValue($_POST['address']);
     $contact = $db_handle->checkValue($_POST['contact']);
     $keywords = $db_handle->checkValue($_POST['keywords']);
@@ -34,7 +35,7 @@ if (isset($_POST['jobPost'])) {
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `job_post`(`customer_id`,`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$userId','$company_id','$job_title','$job_description','$salary','$job_type','$address','$contact','$keywords','$inserted_at')";
+    $query = "INSERT INTO `job_post`(`customer_id`,`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `contact_name`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$userId','$company_id','$job_title','$job_description','$salary','$job_type','$name','$address','$contact','$keywords','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
@@ -97,11 +98,15 @@ if (isset($_POST['jobPost'])) {
                             <option value="Project-Based">Project Based</option>
                         </select>
                     </div>
+
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Address" type="text" name="address" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Name" type="text" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact" type="text" name="contact" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Address" type="text" name="address" required>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control fs-form-control" placeholder="Contact Number" type="text" name="contact" required>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">

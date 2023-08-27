@@ -87,7 +87,7 @@
                 $.ajax({
                     type: 'POST',
                     url: 'check_availability.php',
-                    data: { username: inputUsername,fname:'<?php echo $_POST['fname']; ?>',lname: '<?php echo $_POST['surname']; ?>' },
+                    data: { username: inputUsername },
                     dataType: 'json',
                     success: function (data) {
                         displaySuggestions(data.suggestions);

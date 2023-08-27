@@ -13,6 +13,11 @@ date_default_timezone_set("Asia/Hong_Kong");
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -42,27 +47,27 @@ date_default_timezone_set("Asia/Hong_Kong");
 
                     <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #Fine Art
+                        <i class="fa-regular fa-circle"></i> #FineArt
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #Graphic Design
+                        <i class="fa-regular fa-circle"></i> #GraphicDesign
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #Web Development
+                        <i class="fa-regular fa-circle"></i> #WebDevelopment
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #UX Design
+                        <i class="fa-regular fa-circle"></i> #UXDesign
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #UI Design
+                        <i class="fa-regular fa-circle"></i> #UIDesign
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3"
@@ -77,7 +82,7 @@ date_default_timezone_set("Asia/Hong_Kong");
 
                     <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #Film & Video
+                        <i class="fa-regular fa-circle"></i> #Film&Video
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
@@ -92,13 +97,21 @@ date_default_timezone_set("Asia/Hong_Kong");
 
                     <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
                             onclick="toggleButton(this)">
-                        <i class="fa-regular fa-circle"></i> #Business & Management
+                        <i class="fa-regular fa-circle"></i> #Business&Management
                     </button>
 
                     <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
                             onclick="toggleButton(this)">
                         <i class="fa-regular fa-circle"></i> #Productivity
                     </button>
+
+                    <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
+                            onclick="othersButton(this)">
+                        <i class="fa-regular fa-circle"></i> #Others
+                    </button>
+                    <div class="hidden mt-3" id="othersInput">
+                        <input type="text" class="form-control" onkeyup="othersValue(this.value);" onkeydown="othersValue(this.value);" value="" name="others"/>
+                    </div>
                 </div>
                 <div class="mb-3 mt-5 pt-5 text-center">
                     <form action="skills.php" method="post">
@@ -145,10 +158,47 @@ date_default_timezone_set("Asia/Hong_Kong");
 <script src="assets/js/main.js"></script>
 
 <script>
-    let buttonTexts = [];
+    let selectedValue = '';
     let outputInput = document.getElementById("outputInput");
 
+    function othersValue(val){
+        outputInput.value='#'+val.replace(/\s/g, '');
+    }
+
+    function othersButton(button) {
+        removeAllExpertiseCheckClasses();
+        let icon = button.querySelector("i");
+        let buttonText = button.textContent.trim();
+        let inputField = document.getElementById("othersInput");
+
+        if (button.classList.contains("fs-expertise-check-btn")) {
+            button.classList.remove("fs-expertise-check-btn");
+            button.classList.add("fs-expertise-check-btn-check");
+
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+            icon.classList.remove("fa-circle");
+            icon.classList.add("fa-circle-check");
+
+            inputField.style.display = "block";
+        } else {
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+
+            inputField.style.display = "none";
+        }
+
+        updateInputValue();
+    }
+
+
     function toggleButton(button) {
+        removeAllExpertiseCheckClasses();
         let icon = button.querySelector("i");
         let buttonText = button.textContent.trim();
 
@@ -161,7 +211,7 @@ date_default_timezone_set("Asia/Hong_Kong");
             icon.classList.remove("fa-circle");
             icon.classList.add("fa-circle-check");
 
-            buttonTexts.push(buttonText);
+            outputInput.value = buttonText;
         } else {
             button.classList.remove("fs-expertise-check-btn-check");
             button.classList.add("fs-expertise-check-btn");
@@ -171,17 +221,23 @@ date_default_timezone_set("Asia/Hong_Kong");
             icon.classList.remove("fa-circle-check");
             icon.classList.add("fa-circle");
 
-            let index = buttonTexts.indexOf(buttonText);
-            if (index !== -1) {
-                buttonTexts.splice(index, 1);
-            }
+            outputInput.value = '';
         }
-
-        updateInputValue();
     }
 
-    function updateInputValue() {
-        outputInput.value = buttonTexts.join(", ");
+
+    function removeAllExpertiseCheckClasses() {
+        const buttons = document.querySelectorAll(".btn.fs-expertise-check-btn-check");
+
+        buttons.forEach(button => {
+            let icon = button.querySelector("i");
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+        });
     }
 
 </script>

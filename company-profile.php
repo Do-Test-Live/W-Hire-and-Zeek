@@ -63,7 +63,7 @@ if (isset($_POST['companyProfile'])) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Company Profile - Hire & Zeek</title>
+    <title>Hirer Profile - Hire & Zeek</title>
     <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
@@ -80,19 +80,19 @@ if (isset($_POST['companyProfile'])) {
                 </div>
                 <div class="mt-5">
                     <h3 class="fs-lan-title mt-3 mb-4">
-                        Company Profile
+                        Hirer Profile
                     </h3>
                 </div>
             </div>
             <div class="col-12">
                 <form method="post" action="" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Company Title" type="text"
+                        <input class="form-control fs-form-control" placeholder="Hirer Title" type="text"
                                name="company_title" required>
                     </div>
                     <div class="mb-3">
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Company Image (250X250) Size</label>
+                            <label for="formFile" class="form-label">Hirer Image (250X250) Size</label>
                             <input class="form-control" type="file" name="company_image" id="formFile"
                                    accept="image/png, image/jpeg, image/jpg">
                         </div>
@@ -107,23 +107,23 @@ if (isset($_POST['companyProfile'])) {
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Fine Art
+                            <i class="fa-regular fa-circle"></i> #FineArt
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Graphic Design
+                            <i class="fa-regular fa-circle"></i> #GraphicDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Web Development
+                            <i class="fa-regular fa-circle"></i> #WebDevelopment
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #UX Design
+                            <i class="fa-regular fa-circle"></i> #UXDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #UI Design
+                            <i class="fa-regular fa-circle"></i> #UIDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
@@ -135,7 +135,7 @@ if (isset($_POST['companyProfile'])) {
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Film & Video
+                            <i class="fa-regular fa-circle"></i> #Film&Video
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
@@ -147,7 +147,7 @@ if (isset($_POST['companyProfile'])) {
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Business & Management
+                            <i class="fa-regular fa-circle"></i> #Business&Management
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">

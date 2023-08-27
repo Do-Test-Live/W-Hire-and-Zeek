@@ -55,6 +55,7 @@ if (isset($_POST['favourite'])) {
     <link href="assets/images/favicon.ico" rel="icon" type="image/ico"/>
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
@@ -599,6 +600,8 @@ if (isset($_POST['favourite'])) {
 <script src="assets/vendor/Bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
+<script src="assets/vendor/toastr/js/toastr.min.js" type="text/javascript"></script>
+<script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

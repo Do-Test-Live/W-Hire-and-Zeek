@@ -119,7 +119,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                     <hr/>
                     <div class="row">
                         <div class="col-12 mt-3 mb-2">
-                            <h5 class="text-center">Company Profile</h5>
+                            <h5 class="text-center">Hirer Profile</h5>
                         </div>
                         <div class="col-1">
                             <i class="fa-solid fa-business-time"></i>
@@ -131,6 +131,9 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         </div>
                         <div class="col-3 text-end">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <a href="company-profile.php" class="btn btn-success fs-button-apply">Add New Hirer</a>
                         </div>
                     </div>
                     <?php

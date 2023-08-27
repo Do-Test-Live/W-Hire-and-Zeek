@@ -9,15 +9,15 @@ $lname = $_POST['lname'];
 
 $usernameSuggestions = array();
 for ($i = 0; $i < 3; $i++) {
-    $usernameSuggestions[] = generateUsername($fname, $lname);
+    $usernameSuggestions[] = generateUsername($username);
 }
 
 
 // Function to generate username suggestions
-function generateUsername($firstName, $lastName)
+function generateUsername($val)
 {
     // Implement your own logic to generate username suggestions
-    $username = strtolower(substr($firstName, 0, 1) . $lastName . rand(11, 9999));
+    $username = strtolower($val . rand(11, 9999));
     return $username;
 }
 
