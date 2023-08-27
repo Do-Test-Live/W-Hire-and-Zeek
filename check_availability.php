@@ -4,8 +4,6 @@ $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
 
 $username = $_POST['username'];
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
 
 $usernameSuggestions = array();
 for ($i = 0; $i < 3; $i++) {
