@@ -545,7 +545,7 @@ if (isset($_POST['favourite'])) {
             </div>
         </div>
         <div class="row fixed-bottom text-center fs-nav-apply">
-            <div class="col-12">
+            <div class="col-12 d-none">
                 <div style="background: rgba(255,255,255,0.85);border-top: 5px solid rgba(0,148,14,0.3);">
                     <div class="row pt-3 pb-3 ps-2 pe-2">
                         <div class="col-7 fs-url" id="result">
