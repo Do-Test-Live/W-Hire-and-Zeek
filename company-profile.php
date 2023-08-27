@@ -73,7 +73,7 @@ if (isset($_POST['companyProfile'])) {
 <body>
 <div class="container-fluid">
     <div class="job-post-main">
-        <div class="row pt-5 login-interface">
+        <div class="row pt-5 mb-5 pb-5 login-interface">
             <div class="col-12">
                 <div class="text-center">
                     <img alt="" class="img-fluid" src="assets/images/logo.webp"/>
@@ -156,7 +156,7 @@ if (isset($_POST['companyProfile'])) {
 
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-5">
                         <button type="submit" name="companyProfile" class="btn btn-primary fs-lan-primary-btn w-100">Submit
                         </button>
                     </div>

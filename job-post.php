@@ -67,7 +67,7 @@ if (isset($_POST['jobPost'])) {
 </head>
 <body>
 <div class="container-fluid">
-    <div class="job-post-main pb-5">
+    <div class="job-post-main">
         <div class="row pt-5 login-interface">
             <div class="col-12">
                 <div class="text-center">
