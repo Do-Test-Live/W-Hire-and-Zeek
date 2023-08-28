@@ -121,17 +121,30 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <div class="col-12 mt-3 mb-2">
                             <h5 class="text-center">Hirer Profile</h5>
                         </div>
-                        <div class="col-1">
-                            <i class="fa-solid fa-business-time"></i>
-                        </div>
-                        <div class="col-8">
-                            <p>
-                                <?php echo $fetch_company[0]['name']; ?>
-                            </p>
-                        </div>
-                        <div class="col-3 text-end">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </div>
+                        <?php
+                        $query = "select * from company where customer_id = '$userId'";
+                        $data = $db_handle->runQuery($query);
+                        $row_count = $db_handle->numRows($query);
+                        for ($i = 0; $i < $row_count; $i++) {
+                            ?>
+                            <div class="col-1">
+                                <i class="fa-solid fa-business-time"></i>
+                            </div>
+                            <div class="col-8">
+                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>" style="text-decoration: none; color: #01a862;">
+                                    <p>
+                                        <?php echo $fetch_company[$i]['name']; ?>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="col-3 text-end">
+                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>" style="text-decoration: none; color: #01a862;">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <div class="col-12 mt-3 text-center">
                             <a href="company-profile.php" class="btn btn-success fs-button-apply">Add New Hirer</a>
                         </div>

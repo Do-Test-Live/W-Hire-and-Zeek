@@ -28,9 +28,7 @@ if (isset($_POST['jobPost'])) {
     $contact = $db_handle->checkValue($_POST['contact']);
     $keywords = $db_handle->checkValue($_POST['keywords']);
 
-    $company = $db_handle->runQuery("SELECT * FROM `company` WHERE customer_id = '$userId'");
-
-    $company_id=$company[0]['id'];
+    $company_id=$db_handle->checkValue($_POST['company']);;
 
     $inserted_at = date('Y-m-d h:i:s');
 
@@ -96,6 +94,20 @@ if (isset($_POST['jobPost'])) {
                             <option value="Part-Time">Part-Time</option>
                             <option value="Freelance">Freelance</option>
                             <option value="Project-Based">Project Based</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select fs-form-control" aria-label="Default select example" name="company" required>
+                            <?php
+                            $query = "select * from company where customer_id = '$userId'";
+                            $data = $db_handle->runQuery($query);
+                            $row_count = $db_handle->numRows($query);
+                            for ($i = 0; $i < $row_count; $i++) {
+                            ?>
+                                <option value="<?php echo $data[$i]['id']; ?>"><?php echo $data[$i]['name']; ?></option>
+                                <?php
+
+                            } ?>
                         </select>
                     </div>
 
