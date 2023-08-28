@@ -10,27 +10,18 @@ if (!isset($_SESSION['userid'])) {
 $userId = $_SESSION['userid'];
 
 if (isset($_POST['apply'])) {
-    $job_id = $_POST['job_post'];
+    $job_id = $_POST['job_id'];
     $inserted_at = date('Y-m-d h:i:s');
 
-    if ($job_id != '') {
-        $array = explode(', ', $job_id);
-        foreach ($array as $value) //loop over values
-        {
-            $query = "INSERT INTO `job_apply`(`job_id`, `customer_id`, `inserted_at`) VALUES ('$value','$userId','$inserted_at')";
-            $data = $db_handle->insertQuery($query);
-        }
 
-        echo "<script>
-                alert('Job Applied');
-                window.location.href='jobs.php';
-                </script>";
-    } else {
-        echo "<script>
-                alert('Job not selected');
-                window.location.href='jobs.php';
-                </script>";
-    }
+    $query = "INSERT INTO `job_apply`(`job_id`, `customer_id`, `inserted_at`) VALUES ('$job_id','$userId','$inserted_at')";
+    $data = $db_handle->insertQuery($query);
+
+    echo "<script>
+            alert('Job Applied');
+            window.location.href='jobs.php';
+            </script>";
+
 }
 
 if (isset($_POST['favourite'])) {
