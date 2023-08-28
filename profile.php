@@ -6,6 +6,52 @@ date_default_timezone_set("Asia/Hong_Kong");
 if (!isset($_SESSION['userid'])) {
     header("Location: login.php");
 }
+
+if(isset($_POST['uploadPhoto'])){
+    $profile_id=$_POST['profile_id'];
+
+    $image = '';
+    if (!empty($_FILES['customer_image']['name'])) {
+        $RandomAccountNumber = mt_rand(1, 99999);
+        $file_name = $RandomAccountNumber . "_" . $_FILES['customer_image']['name'];
+        $file_size = $_FILES['customer_image']['size'];
+        $file_tmp  = $_FILES['customer_image']['tmp_name'];
+
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
+            $attach_files = '';
+            echo "<script>
+                alert('Image format not work.');
+                window.location.href='profile.php';
+                </script>";
+
+        } else {
+            move_uploaded_file($file_tmp, "assets/images/customer_profile/" . $file_name);
+            $image = "assets/images/customer_profile/" . $file_name;
+        }
+    }else{
+        $image = "assets/images/company/def.jpg";
+    }
+
+
+    $query = "UPDATE `customer` SET `image`='$image' WHERE id='$profile_id'";
+
+    $insert = $db_handle->insertQuery($query);
+
+    if ($insert) {
+        echo "<script>
+                alert('Profile Image Uploaded.');
+                window.location.href='profile.php';
+                </script>";
+    } else {
+        echo "<script>
+                document.cookie = 'alert = 5;';
+                window.location.href='profile.php';
+                </script>";
+    }
+}
+
+
 $userId = $_SESSION['userid'];
 
 $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
@@ -22,6 +68,25 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block; /* Adjust display property as needed */
+        }
+
+        .icon-link {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            padding: 8px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007c4c;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -31,7 +96,27 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                 <div class="fs-dashboard-alert">
                     <div class="row text-white p-3">
                         <div class="col-6 text-center mx-auto">
-                            <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
+
+                            <?php
+                                if($fetch_user[0]['image']==''){
+                                    ?>
+                                    <div class="image-container">
+
+                                        <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
+
+                                        <!-- Clickable Pen Icon -->
+                                        <a  class="icon-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <i class="fas fa-pen-to-square fa-2x"></i>
+                                        </a>
+                                    </div>
+                            <?php
+                                }else{
+                                    ?>
+                                    <img src="<?php echo $fetch_user[0]['image']; ?>" class="img-fluid rounded-circle" alt=""/>
+                            <?php
+                                }
+                            ?>
+
                             <h5>
                                 <?php echo $fetch_user[0]['fname']; ?><?php echo $fetch_user[0]['surname']; ?>
                             </h5>
@@ -43,6 +128,32 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: White">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Image</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <input type="hidden" name="profile_id" value="<?php echo $fetch_user[0]['id']; ?>" required/>
+
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" name="customer_image" required>
+                                <label class="input-group-text">Upload</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="uploadPhoto" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="row login-interface">
             <div class="col-12 fs-primary-color pb-5">
                 <div class="row">

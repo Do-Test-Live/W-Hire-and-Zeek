@@ -134,6 +134,20 @@ if (isset($_POST['favourite'])) {
                                         <div class="col-6 mt-3">
                                             <div class="card">
                                                 <div class="p-3">
+                                                    <?php
+
+                                                    if($data[$i]['image']!=''){
+                                                        ?>
+                                                        <img alt="" class="card-img-top fs-job-card-img"
+                                                             src="<?php echo $data[$i]["image"]; ?>">
+                                                            <?php
+                                                    }else{
+                                                        ?>
+                                                        <img alt="" class="card-img-top fs-job-card-img"
+                                                             src="assets/images/company/def.jpg">
+                                                            <?php
+                                                    }
+                                                    ?>
                                                     <img alt="" class="card-img-top fs-job-card-img"
                                                          src="assets/images/company/def.jpg">
                                                     <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["fname"]; ?> <?php echo $data[$i]["surname"]; ?></p>
@@ -163,9 +177,20 @@ if (isset($_POST['favourite'])) {
                                                                                 class="fa-solid fa-chevron-left"></i></a>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            <img src="assets/images/company/def.jpg"
-                                                                                 class="img-fluid" alt=""
-                                                                                 style="border: 3px solid white;border-radius: 15px;"/>
+                                                                            <?php
+
+                                                                            if($data[$i]['image']!=''){
+                                                                                ?>
+                                                                                <img alt="" class="card-img-top fs-job-card-img"
+                                                                                     src="<?php echo $data[$i]["image"]; ?>" style="border: 3px solid white;border-radius: 15px;">
+                                                                                <?php
+                                                                            }else{
+                                                                                ?>
+                                                                                <img alt="" class="card-img-top fs-job-card-img"
+                                                                                     src="assets/images/company/def.jpg" style="border: 3px solid white;border-radius: 15px;">
+                                                                                <?php
+                                                                            }
+                                                                            ?>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <h1 class="text-center text-white mt-3"
