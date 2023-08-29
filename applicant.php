@@ -148,8 +148,6 @@ if (isset($_POST['favourite'])) {
                                                             <?php
                                                     }
                                                     ?>
-                                                    <img alt="" class="card-img-top fs-job-card-img"
-                                                         src="assets/images/company/def.jpg">
                                                     <p class="card-text card-sub-heading mt-2"><?php echo $data[$i]["fname"]; ?> <?php echo $data[$i]["surname"]; ?></p>
                                                 </div>
                                                 <div class="card-body">
