@@ -69,6 +69,11 @@ if (isset($_POST['companyProfile'])) {
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -154,6 +159,14 @@ if (isset($_POST['companyProfile'])) {
                             <i class="fa-regular fa-circle"></i> #Productivity
                         </button>
 
+                        <button type="button" class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
+                                onclick="othersButton(this)">
+                            <i class="fa-regular fa-circle"></i> #Others
+                        </button>
+                        <div class="hidden mt-3" id="othersInput">
+                            <input type="text" class="form-control" onkeyup="othersValue(this.value);" onkeydown="othersValue(this.value);" value="" name="others"/>
+                        </div>
+
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
                     <div class="mb-5">
@@ -205,10 +218,47 @@ if (isset($_POST['companyProfile'])) {
 
 
 <script>
-    let buttonTexts = [];
+    let selectedValue = '';
     let outputInput = document.getElementById("outputInput");
 
+    function othersValue(val){
+        outputInput.value='#'+val.replace(/\s/g, '');
+    }
+
+    function othersButton(button) {
+        removeAllExpertiseCheckClasses();
+        let icon = button.querySelector("i");
+        let buttonText = button.textContent.trim();
+        let inputField = document.getElementById("othersInput");
+
+        if (button.classList.contains("fs-expertise-check-btn")) {
+            button.classList.remove("fs-expertise-check-btn");
+            button.classList.add("fs-expertise-check-btn-check");
+
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+            icon.classList.remove("fa-circle");
+            icon.classList.add("fa-circle-check");
+
+            inputField.style.display = "block";
+        } else {
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+
+            inputField.style.display = "none";
+        }
+
+    }
+
+
     function toggleButton(button) {
+        let inputField = document.getElementById("othersInput");
+        removeAllExpertiseCheckClasses();
         let icon = button.querySelector("i");
         let buttonText = button.textContent.trim();
 
@@ -221,7 +271,8 @@ if (isset($_POST['companyProfile'])) {
             icon.classList.remove("fa-circle");
             icon.classList.add("fa-circle-check");
 
-            buttonTexts.push(buttonText);
+            outputInput.value = buttonText;
+            inputField.style.display = "none";
         } else {
             button.classList.remove("fs-expertise-check-btn-check");
             button.classList.add("fs-expertise-check-btn");
@@ -231,17 +282,24 @@ if (isset($_POST['companyProfile'])) {
             icon.classList.remove("fa-circle-check");
             icon.classList.add("fa-circle");
 
-            let index = buttonTexts.indexOf(buttonText);
-            if (index !== -1) {
-                buttonTexts.splice(index, 1);
-            }
+            outputInput.value = '';
+            inputField.style.display = "none";
         }
-
-        updateInputValue();
     }
 
-    function updateInputValue() {
-        outputInput.value = buttonTexts.join(", ");
+
+    function removeAllExpertiseCheckClasses() {
+        const buttons = document.querySelectorAll(".btn.fs-expertise-check-btn-check");
+
+        buttons.forEach(button => {
+            let icon = button.querySelector("i");
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+        });
     }
 
 </script>

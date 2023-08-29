@@ -7,15 +7,19 @@ if (!isset($_SESSION['userid'])) {
     header("Location: login.php");
 }
 
-if(isset($_POST['uploadPhoto'])){
-    $profile_id=$_POST['profile_id'];
+if (isset($_POST['uploadPhoto'])) {
+    $profile_id = $_POST['profile_id'];
+    $contact_number = $_POST['contact_number'];
 
     $image = '';
+    $query_extend = '';
+    $i = 0;
+
     if (!empty($_FILES['customer_image']['name'])) {
         $RandomAccountNumber = mt_rand(1, 99999);
         $file_name = $RandomAccountNumber . "_" . $_FILES['customer_image']['name'];
         $file_size = $_FILES['customer_image']['size'];
-        $file_tmp  = $_FILES['customer_image']['tmp_name'];
+        $file_tmp = $_FILES['customer_image']['tmp_name'];
 
         $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
         if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
@@ -28,19 +32,34 @@ if(isset($_POST['uploadPhoto'])){
         } else {
             move_uploaded_file($file_tmp, "assets/images/customer_profile/" . $file_name);
             $image = "assets/images/customer_profile/" . $file_name;
+
+            $i = 1;
         }
-    }else{
+    } else {
         $image = "assets/images/company/def.jpg";
     }
 
+    $c=0;
+    if ($contact_number != '') {
+        $c = 1;
+    }
 
-    $query = "UPDATE `customer` SET `image`='$image' WHERE id='$profile_id'";
+    $query = '';
+
+    if ($c == 1 && $i == 1) {
+        $query = "UPDATE `customer` SET `image`='$image',phone_number='$contact_number' WHERE id='$profile_id'";
+    } else if ($i ==1) {
+        $query = "UPDATE `customer` SET `image`='$image' WHERE id='$profile_id'";
+    } else if ($c == 1) {
+        $query = "UPDATE `customer` SET phone_number='$contact_number' WHERE id='$profile_id'";
+    }
+
 
     $insert = $db_handle->insertQuery($query);
 
     if ($insert) {
         echo "<script>
-                alert('Profile Image Uploaded.');
+                alert('Data Updated.');
                 window.location.href='profile.php';
                 </script>";
     } else {
@@ -98,23 +117,31 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         <div class="col-6 text-center mx-auto">
 
                             <?php
-                                if($fetch_user[0]['image']==''){
-                                    ?>
-                                    <div class="image-container">
+                            if ($fetch_user[0]['image'] == '') {
+                                ?>
+                                <div class="image-container">
 
-                                        <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
+                                    <i class="fa-solid fa-circle-user fa-5x mx-auto"></i>
 
-                                        <!-- Clickable Pen Icon -->
-                                        <a  class="icon-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i class="fas fa-pen-to-square fa-2x"></i>
-                                        </a>
-                                    </div>
-                            <?php
-                                }else{
-                                    ?>
-                                    <img src="<?php echo $fetch_user[0]['image']; ?>" class="img-fluid rounded-circle" alt=""/>
-                            <?php
-                                }
+                                    <!-- Clickable Pen Icon -->
+                                    <a class="icon-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fas fa-pen-to-square fa-2x"></i>
+                                    </a>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="image-container">
+
+                                    <img src="<?php echo $fetch_user[0]['image']; ?>" class="img-fluid rounded-circle"
+                                         alt=""/>
+                                    <!-- Clickable Pen Icon -->
+                                    <a class="icon-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fas fa-pen-to-square fa-2x"></i>
+                                    </a>
+                                </div>
+                                <?php
+                            }
                             ?>
 
                             <h5>
@@ -138,16 +165,20 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                     </div>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <input type="hidden" name="profile_id" value="<?php echo $fetch_user[0]['id']; ?>" required/>
+                            <input type="hidden" name="profile_id" value="<?php echo $fetch_user[0]['id']; ?>"
+                                   required/>
 
                             <div class="input-group mb-3">
-                                <input type="file" class="form-control" name="customer_image" required>
+                                <input type="file" class="form-control" name="customer_image">
                                 <label class="input-group-text">Upload</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input class="form-control" type="tel" name="contact_number" value="<?php echo $fetch_user[0]['phone_number']; ?>">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" name="uploadPhoto" class="btn btn-primary">Upload</button>
+                            <button type="submit" name="uploadPhoto" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -242,14 +273,16 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                                 <i class="fa-solid fa-business-time"></i>
                             </div>
                             <div class="col-8">
-                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>" style="text-decoration: none; color: #01a862;">
+                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>"
+                                   style="text-decoration: none; color: #01a862;">
                                     <p>
                                         <?php echo $fetch_company[$i]['name']; ?>
                                     </p>
                                 </a>
                             </div>
                             <div class="col-3 text-end">
-                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>" style="text-decoration: none; color: #01a862;">
+                                <a href="company.php?company_id=<?php echo $fetch_company[$i]['id']; ?>"
+                                   style="text-decoration: none; color: #01a862;">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
                             </div>

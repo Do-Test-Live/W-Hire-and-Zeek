@@ -192,8 +192,6 @@ date_default_timezone_set("Asia/Hong_Kong");
 
             inputField.style.display = "none";
         }
-
-        updateInputValue();
     }
 
 

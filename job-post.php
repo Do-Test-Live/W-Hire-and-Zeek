@@ -49,6 +49,8 @@ if (isset($_POST['jobPost'])) {
                 </script>";
     }
 }
+
+$fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
 ?>
 
 <!doctype html>
@@ -62,6 +64,12 @@ if (isset($_POST['jobPost'])) {
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -112,13 +120,13 @@ if (isset($_POST['jobPost'])) {
                     </div>
 
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Name" type="text" name="name" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Name" type="text" value="<?php echo $fetch_user[0]['fname']; ?> <?php echo $fetch_user[0]['surname']; ?>" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Address" type="text" name="address" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Address" type="text" name="address" value="<?php echo $fetch_user[0]['region']; ?>" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Number" type="text" name="contact" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Number" type="text" name="contact" value="<?php echo $fetch_user[0]['phone_number']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
@@ -130,23 +138,23 @@ if (isset($_POST['jobPost'])) {
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Fine Art
+                            <i class="fa-regular fa-circle"></i> #FineArt
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Graphic Design
+                            <i class="fa-regular fa-circle"></i> #GraphicDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #Web Development
+                            <i class="fa-regular fa-circle"></i> #WebDevelopment
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #UX Design
+                            <i class="fa-regular fa-circle"></i> #UXDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
-                            <i class="fa-regular fa-circle"></i> #UI Design
+                            <i class="fa-regular fa-circle"></i> #UIDesign
                         </button>
 
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
@@ -176,6 +184,14 @@ if (isset($_POST['jobPost'])) {
                         <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Productivity
                         </button>
+
+                        <button type="button" class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3"
+                                onclick="othersButton(this)">
+                            <i class="fa-regular fa-circle"></i> #Others
+                        </button>
+                        <div class="hidden mt-3" id="othersInput">
+                            <input type="text" class="form-control" onkeyup="othersValue(this.value);" onkeydown="othersValue(this.value);" value="" name="others"/>
+                        </div>
 
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
@@ -227,10 +243,47 @@ if (isset($_POST['jobPost'])) {
 
 
 <script>
-    let buttonTexts = [];
+    let selectedValue = '';
     let outputInput = document.getElementById("outputInput");
 
+    function othersValue(val){
+        outputInput.value='#'+val.replace(/\s/g, '');
+    }
+
+    function othersButton(button) {
+        removeAllExpertiseCheckClasses();
+        let icon = button.querySelector("i");
+        let buttonText = button.textContent.trim();
+        let inputField = document.getElementById("othersInput");
+
+        if (button.classList.contains("fs-expertise-check-btn")) {
+            button.classList.remove("fs-expertise-check-btn");
+            button.classList.add("fs-expertise-check-btn-check");
+
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+            icon.classList.remove("fa-circle");
+            icon.classList.add("fa-circle-check");
+
+            inputField.style.display = "block";
+        } else {
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+
+            inputField.style.display = "none";
+        }
+
+    }
+
+
     function toggleButton(button) {
+        let inputField = document.getElementById("othersInput");
+        removeAllExpertiseCheckClasses();
         let icon = button.querySelector("i");
         let buttonText = button.textContent.trim();
 
@@ -243,7 +296,8 @@ if (isset($_POST['jobPost'])) {
             icon.classList.remove("fa-circle");
             icon.classList.add("fa-circle-check");
 
-            buttonTexts.push(buttonText);
+            outputInput.value = buttonText;
+            inputField.style.display = "none";
         } else {
             button.classList.remove("fs-expertise-check-btn-check");
             button.classList.add("fs-expertise-check-btn");
@@ -253,21 +307,24 @@ if (isset($_POST['jobPost'])) {
             icon.classList.remove("fa-circle-check");
             icon.classList.add("fa-circle");
 
-            let index = buttonTexts.indexOf(buttonText);
-            if (index !== -1) {
-                buttonTexts.splice(index, 1);
-            }
-        }
-
-        if (buttonTexts.length > 2) {
-            alert("You can select up to three keywords. Currently selected: " + buttonTexts.length);
-        } else {
-            updateInputValue();
+            outputInput.value = '';
+            inputField.style.display = "none";
         }
     }
 
-    function updateInputValue() {
-        outputInput.value = buttonTexts.join(", ");
+
+    function removeAllExpertiseCheckClasses() {
+        const buttons = document.querySelectorAll(".btn.fs-expertise-check-btn-check");
+
+        buttons.forEach(button => {
+            let icon = button.querySelector("i");
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+        });
     }
 
 </script>
