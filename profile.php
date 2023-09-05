@@ -330,7 +330,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <option selected>English</option>
                         </select>
                     </div>
-                </div>
+                </div><!--
                 <div class="row mt-3 mb-2">
                     <div class="col-1">
                         <p class="mt-3">
@@ -348,8 +348,8 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <option>Hirer</option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
+                </div>-->
+                <div class="row mt-3 ">
                     <div class="col-1">
                         <i class="fa-regular fa-file-lines"></i>
                     </div>

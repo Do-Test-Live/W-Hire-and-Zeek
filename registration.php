@@ -105,7 +105,7 @@ date_default_timezone_set("Asia/Hong_Kong");
                                     </div>
                                     <div class="col-6">
                                         <input class="form-control fs-registration-control" name="dob"
-                                               type="date" required/>
+                                               type="date" id="birthdate" required/>
                                     </div>
                                 </div>
                             </div>
@@ -201,5 +201,19 @@ date_default_timezone_set("Asia/Hong_Kong");
 <script src="assets/vendor/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    // JavaScript code will go here
+    const birthdateInput = document.getElementById('birthdate');
+
+    // Calculate the minimum birthdate (today - 16 years)
+    const today = new Date();
+    const minBirthdate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+
+    // Format the minimum birthdate as YYYY-MM-DD (required by the date input)
+    const minBirthdateFormatted = minBirthdate.toISOString().split('T')[0];
+
+    // Set the min attribute of the birthdate input
+    birthdateInput.setAttribute('max', minBirthdateFormatted);
+</script>
 </body>
 </html>

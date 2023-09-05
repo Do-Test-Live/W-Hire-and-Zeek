@@ -64,7 +64,7 @@ if(isset($_POST['login'])){
             <div class="col-12">
                 <form method="post" action="">
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Email or Username" type="email" name="email">
+                        <input class="form-control fs-form-control" placeholder="Email" type="email" name="email">
                     </div>
                     <div class="mb-4">
                         <input class="form-control fs-form-control" placeholder="Password" type="password" name="password">
