@@ -22,6 +22,7 @@ if (isset($_POST['jobPost'])) {
     $job_title = $db_handle->checkValue($_POST['job_title']);
     $job_description = $db_handle->checkValue($_POST['job_description']);
     $salary = $db_handle->checkValue($_POST['salary']);
+    $salary_rate = $db_handle->checkValue($_POST['salary_rate']);
     $job_type = $db_handle->checkValue($_POST['job_type']);
     $name = $db_handle->checkValue($_POST['name']);
     $address = $db_handle->checkValue($_POST['address']);
@@ -33,7 +34,7 @@ if (isset($_POST['jobPost'])) {
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `job_post`(`customer_id`,`company_id`,`job_title`, `job_description`, `salary`, `job_type`, `contact_name`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$userId','$company_id','$job_title','$job_description','$salary','$job_type','$name','$address','$contact','$keywords','$inserted_at')";
+    $query = "INSERT INTO `job_post`(`customer_id`,`company_id`,`job_title`, `job_description`, `salary`,, `salary_rate`, `job_type`, `contact_name`, `address`, `contact`, `keywords`, `inserted_at`) VALUES ('$userId','$company_id','$job_title','$job_description','$salary','$salary_rate','$job_type','$name','$address','$contact','$keywords','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
@@ -102,6 +103,14 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <option value="Part-Time">Part-Time</option>
                             <option value="Freelance">Freelance</option>
                             <option value="Project-Based">Project Based</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select fs-form-control" aria-label="Default select example" name="salary_rate" required>
+                            <option value="Hour" selected>Hour</option>
+                            <option value="Day">Day</option>
+                            <option value="Month">Month</option>
+                            <option value="Project">Project</option>
                         </select>
                     </div>
                     <div class="mb-3">

@@ -156,10 +156,18 @@ if (isset($_POST['favourite'])) {
                 <div class="mt-5 text-center">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation" style="width: 100px">
+                        <li class="nav-item" role="presentation" style="width: 150px">
                             <a aria-controls="tab1" aria-selected="true" class="nav-link active" data-bs-toggle="tab"
                                href="#tab1"
-                               id="tab1-tab" role="tab">All 10</a>
+                               id="tab1-tab" role="tab">
+                                <?php
+                                $query = "SELECT * FROM `customer` where id='$userId'";
+                                $data = $db_handle->runQuery($query);
+
+                                $keywords = $data[0]['keywords'];
+                                echo $data[0]['keywords'];
+                                ?>
+                            </a>
                         </li>
                         <li class="nav-item" role="presentation" style="width: 100px">
                             <a aria-controls="tab2" aria-selected="false" class="nav-link" data-bs-toggle="tab"
@@ -183,7 +191,7 @@ if (isset($_POST['favourite'])) {
                                     $query_add_on = " and j.job_type='{$_GET['job_type']}'";
                                 }
 
-                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id" . $query_add_on . " order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id" . $query_add_on . " order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -205,35 +213,44 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/hr</small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
                                                     <div class="text-center mt-2">
-                                                        <button type="button" name="submit" class="btn btn-outline-success fs-skills-next-btn" data-bs-toggle="modal"
+                                                        <button type="button" name="submit"
+                                                                class="btn btn-outline-success fs-skills-next-btn"
+                                                                data-bs-toggle="modal"
                                                                 data-bs-target="#staticBackdrop<?php echo $data[$i]["id"]; ?>">
                                                             Detail
                                                         </button>
                                                     </div>
 
-                                                    <div class="modal fade" id="staticBackdrop<?php echo $data[$i]["id"]; ?>" data-bs-backdrop="static"
+                                                    <div class="modal fade"
+                                                         id="staticBackdrop<?php echo $data[$i]["id"]; ?>"
+                                                         data-bs-backdrop="static"
                                                          data-bs-keyboard="false" tabindex="-1"
                                                          aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center align-items-center">
-                                                                    <a class="text-decoration-none text-white card-checkbox" data-bs-dismiss="modal"
-                                                                       aria-label="Close"><i class="fa-solid fa-chevron-left"></i></a>
+                                                                    <a class="text-decoration-none text-white card-checkbox"
+                                                                       data-bs-dismiss="modal"
+                                                                       aria-label="Close"><i
+                                                                                class="fa-solid fa-chevron-left"></i></a>
                                                                     <?php
                                                                     $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
                                                                     ?>
                                                                     <form action="" method="post">
                                                                         <input type="hidden" name="job_id"
-                                                                               value="<?php echo $data[$i]["id"]; ?>" required>
-                                                                        <button type="submit" name="favourite" class="card-heart"><i
+                                                                               value="<?php echo $data[$i]["id"]; ?>"
+                                                                               required>
+                                                                        <button type="submit" name="favourite"
+                                                                                class="card-heart"><i
                                                                                     class="fas fa-heart <?php if ($favourite % 2 == 1) echo 'text-danger'; ?>"></i>
                                                                         </button>
                                                                     </form>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            <img src="<?php echo $data[$i]["image"]; ?>" class="img-fluid" alt=""
+                                                                            <img src="<?php echo $data[$i]["image"]; ?>"
+                                                                                 class="img-fluid" alt=""
                                                                                  style="border: 3px solid white;border-radius: 15px;"/>
                                                                         </div>
                                                                         <div class="col-12">
@@ -250,7 +267,8 @@ if (isset($_POST['favourite'])) {
                                                                     <div class="text-start">
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
-                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per hour
+                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per
+                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
@@ -273,9 +291,12 @@ if (isset($_POST['favourite'])) {
                                                                 </div>
                                                                 <div class="modal-footer" style="border-top: unset">
                                                                     <form action="" method="post">
-                                                                        <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>"
+                                                                        <input type="hidden" name="job_id"
+                                                                               value="<?php echo $data[$i]["id"]; ?>"
                                                                                required>
-                                                                        <button type="submit" class="btn btn-success fs-button-apply" name="apply">Apply
+                                                                        <button type="submit"
+                                                                                class="btn btn-success fs-button-apply"
+                                                                                name="apply">Apply
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -304,7 +325,7 @@ if (isset($_POST['favourite'])) {
                         <div aria-labelledby="tab2-tab" class="tab-pane fade" id="tab2" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -327,35 +348,44 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/hr</small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
                                                     <div class="text-center mt-2">
-                                                        <button type="button" name="submit" class="btn btn-outline-success fs-skills-next-btn" data-bs-toggle="modal"
+                                                        <button type="button" name="submit"
+                                                                class="btn btn-outline-success fs-skills-next-btn"
+                                                                data-bs-toggle="modal"
                                                                 data-bs-target="#staticBackdrop<?php echo $data[$i]["id"]; ?>">
                                                             Detail
                                                         </button>
                                                     </div>
 
-                                                    <div class="modal fade" id="staticBackdrop<?php echo $data[$i]["id"]; ?>" data-bs-backdrop="static"
+                                                    <div class="modal fade"
+                                                         id="staticBackdrop<?php echo $data[$i]["id"]; ?>"
+                                                         data-bs-backdrop="static"
                                                          data-bs-keyboard="false" tabindex="-1"
                                                          aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center align-items-center">
-                                                                    <a class="text-decoration-none text-white card-checkbox" data-bs-dismiss="modal"
-                                                                       aria-label="Close"><i class="fa-solid fa-chevron-left"></i></a>
+                                                                    <a class="text-decoration-none text-white card-checkbox"
+                                                                       data-bs-dismiss="modal"
+                                                                       aria-label="Close"><i
+                                                                                class="fa-solid fa-chevron-left"></i></a>
                                                                     <?php
                                                                     $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
                                                                     ?>
                                                                     <form action="" method="post">
                                                                         <input type="hidden" name="job_id"
-                                                                               value="<?php echo $data[$i]["id"]; ?>" required>
-                                                                        <button type="submit" name="favourite" class="card-heart"><i
+                                                                               value="<?php echo $data[$i]["id"]; ?>"
+                                                                               required>
+                                                                        <button type="submit" name="favourite"
+                                                                                class="card-heart"><i
                                                                                     class="fas fa-heart <?php if ($favourite % 2 == 1) echo 'text-danger'; ?>"></i>
                                                                         </button>
                                                                     </form>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            <img src="<?php echo $data[$i]["image"]; ?>" class="img-fluid" alt=""
+                                                                            <img src="<?php echo $data[$i]["image"]; ?>"
+                                                                                 class="img-fluid" alt=""
                                                                                  style="border: 3px solid white;border-radius: 15px;"/>
                                                                         </div>
                                                                         <div class="col-12">
@@ -372,7 +402,8 @@ if (isset($_POST['favourite'])) {
                                                                     <div class="text-start">
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
-                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per hour
+                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per
+                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
@@ -395,9 +426,12 @@ if (isset($_POST['favourite'])) {
                                                                 </div>
                                                                 <div class="modal-footer" style="border-top: unset">
                                                                     <form action="" method="post">
-                                                                        <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>"
+                                                                        <input type="hidden" name="job_id"
+                                                                               value="<?php echo $data[$i]["id"]; ?>"
                                                                                required>
-                                                                        <button type="submit" class="btn btn-success fs-button-apply" name="apply">Apply
+                                                                        <button type="submit"
+                                                                                class="btn btn-success fs-button-apply"
+                                                                                name="apply">Apply
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -421,7 +455,7 @@ if (isset($_POST['favourite'])) {
                         <div aria-labelledby="tab3-tab" class="tab-pane fade" id="tab3" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where  j.keywords='$keywords' and c.id=j.company_id order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -444,35 +478,44 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/hr</small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
                                                     <div class="text-center mt-2">
-                                                        <button type="button" name="submit" class="btn btn-outline-success fs-skills-next-btn" data-bs-toggle="modal"
+                                                        <button type="button" name="submit"
+                                                                class="btn btn-outline-success fs-skills-next-btn"
+                                                                data-bs-toggle="modal"
                                                                 data-bs-target="#staticBackdrop<?php echo $data[$i]["id"]; ?>">
                                                             Detail
                                                         </button>
                                                     </div>
 
-                                                    <div class="modal fade" id="staticBackdrop<?php echo $data[$i]["id"]; ?>" data-bs-backdrop="static"
+                                                    <div class="modal fade"
+                                                         id="staticBackdrop<?php echo $data[$i]["id"]; ?>"
+                                                         data-bs-backdrop="static"
                                                          data-bs-keyboard="false" tabindex="-1"
                                                          aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center align-items-center">
-                                                                    <a class="text-decoration-none text-white card-checkbox" data-bs-dismiss="modal"
-                                                                       aria-label="Close"><i class="fa-solid fa-chevron-left"></i></a>
+                                                                    <a class="text-decoration-none text-white card-checkbox"
+                                                                       data-bs-dismiss="modal"
+                                                                       aria-label="Close"><i
+                                                                                class="fa-solid fa-chevron-left"></i></a>
                                                                     <?php
                                                                     $favourite = $db_handle->numRows("select * from favorite where job_id={$data[$i]['id']}");
                                                                     ?>
                                                                     <form action="" method="post">
                                                                         <input type="hidden" name="job_id"
-                                                                               value="<?php echo $data[$i]["id"]; ?>" required>
-                                                                        <button type="submit" name="favourite" class="card-heart"><i
+                                                                               value="<?php echo $data[$i]["id"]; ?>"
+                                                                               required>
+                                                                        <button type="submit" name="favourite"
+                                                                                class="card-heart"><i
                                                                                     class="fas fa-heart <?php if ($favourite % 2 == 1) echo 'text-danger'; ?>"></i>
                                                                         </button>
                                                                     </form>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            <img src="<?php echo $data[$i]["image"]; ?>" class="img-fluid" alt=""
+                                                                            <img src="<?php echo $data[$i]["image"]; ?>"
+                                                                                 class="img-fluid" alt=""
                                                                                  style="border: 3px solid white;border-radius: 15px;"/>
                                                                         </div>
                                                                         <div class="col-12">
@@ -489,7 +532,8 @@ if (isset($_POST['favourite'])) {
                                                                     <div class="text-start">
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
-                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per hour
+                                                                            $<?php echo $data[$i]["salary"]; ?> HKD per
+                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>

@@ -36,6 +36,11 @@ if (isset($_POST['favourite'])) {
                 </script>";
 
 }
+
+$query = "SELECT * FROM `customer` where id='$userId'";
+$data = $db_handle->runQuery($query);
+
+$keywords = $data[0]['keywords'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,7 +161,7 @@ if (isset($_POST['favourite'])) {
                 $query_add_on = " and j.job_type='{$_GET['job_type']}'";
             }
 
-            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id" . $query_add_on . " order by j.id desc";
+            $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id" . $query_add_on . " order by j.id desc";
             $data = $db_handle->runQuery($query);
             $row_count = $db_handle->numRows($query);
             for ($i = 0; $i < $row_count; $i++) {
@@ -189,7 +194,7 @@ if (isset($_POST['favourite'])) {
                                         <p class="card-text"><span
                                                     class="price">$<?php echo $data[$i]["salary"]; ?> HKD</span><small
                                                     class="text-muted"> per
-                                                hour</small></p>
+                                                <?php echo strtolower($data[$i]["salary"]); ?></small></p>
                                         <p class="card-text"><small
                                                     class="text-muted"><?php echo $data[$i]["keywords"]; ?></small></p>
                                     </div>
@@ -243,7 +248,7 @@ if (isset($_POST['favourite'])) {
                                     <div>
                                         <p>
                                             <span class="badge text-bg-success">Salary/Rate:</span>
-                                            $<?php echo $data[$i]["salary"]; ?> HKD per hour
+                                            $<?php echo $data[$i]["salary"]; ?> HKD per <?php echo strtolower($data[$i]["salary"]); ?>
                                         </p>
                                         <p>
                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
