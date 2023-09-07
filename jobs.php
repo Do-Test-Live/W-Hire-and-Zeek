@@ -165,8 +165,8 @@ if (isset($_POST['favourite'])) {
                                 $data = $db_handle->runQuery($query);
 
                                 $keywords = $data[0]['keywords'];
-                                echo $data[0]['keywords'];
                                 ?>
+                                All
                             </a>
                         </li>
                         <li class="nav-item" role="presentation" style="width: 100px">
@@ -191,7 +191,7 @@ if (isset($_POST['favourite'])) {
                                     $query_add_on = " and j.job_type='{$_GET['job_type']}'";
                                 }
 
-                                $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id" . $query_add_on . " order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id" . $query_add_on . " order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -213,7 +213,7 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary_rate"]); ?></small></p>
                                                     <div class="text-center mt-2">
                                                         <button type="button" name="submit"
                                                                 class="btn btn-outline-success fs-skills-next-btn"
@@ -268,7 +268,7 @@ if (isset($_POST['favourite'])) {
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
                                                                             $<?php echo $data[$i]["salary"]; ?> HKD per
-                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
+                                                                            <?php echo strtolower($data[$i]["salary_rate"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
@@ -325,7 +325,7 @@ if (isset($_POST['favourite'])) {
                         <div aria-labelledby="tab2-tab" class="tab-pane fade" id="tab2" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -348,7 +348,7 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary_rate"]); ?></small></p>
                                                     <div class="text-center mt-2">
                                                         <button type="button" name="submit"
                                                                 class="btn btn-outline-success fs-skills-next-btn"
@@ -403,7 +403,7 @@ if (isset($_POST['favourite'])) {
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
                                                                             $<?php echo $data[$i]["salary"]; ?> HKD per
-                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
+                                                                            <?php echo strtolower($data[$i]["salary_rate"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
@@ -455,7 +455,7 @@ if (isset($_POST['favourite'])) {
                         <div aria-labelledby="tab3-tab" class="tab-pane fade" id="tab3" role="tabpanel">
                             <div class="row">
                                 <?php
-                                $query = "SELECT * FROM company as c,job_post as j where  j.keywords='$keywords' and c.id=j.company_id order by j.id desc";
+                                $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id order by j.id desc";
                                 $data = $db_handle->runQuery($query);
                                 $row_count = $db_handle->numRows($query);
                                 for ($i = 0; $i < $row_count; $i++) {
@@ -478,7 +478,7 @@ if (isset($_POST['favourite'])) {
                                                     <h5 class="card-title card-heading"><?php echo $data[$i]["job_title"]; ?></h5>
                                                     <p class="card-text"><small
                                                                 class="text-muted">$<?php echo $data[$i]["salary"]; ?>
-                                                            HKD/<?php echo strtolower($data[$i]["salary"]); ?></small></p>
+                                                            HKD/<?php echo strtolower($data[$i]["salary_rate"]); ?></small></p>
                                                     <div class="text-center mt-2">
                                                         <button type="button" name="submit"
                                                                 class="btn btn-outline-success fs-skills-next-btn"
@@ -533,7 +533,7 @@ if (isset($_POST['favourite'])) {
                                                                         <p>
                                                                             <span class="badge text-bg-success">Salary/Rate:</span>
                                                                             $<?php echo $data[$i]["salary"]; ?> HKD per
-                                                                            <?php echo strtolower($data[$i]["salary"]); ?>
+                                                                            <?php echo strtolower($data[$i]["salary_rate"]); ?>
                                                                         </p>
                                                                         <p>
                                                                             <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
