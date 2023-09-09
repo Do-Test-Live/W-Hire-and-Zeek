@@ -87,7 +87,7 @@
             <div class="col-12">
                 <form action="verification.php" method="post">
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Email or Username" id="email" name="email" type="email" required>
+                        <input class="form-control fs-form-control" placeholder="Email" id="email" name="email" type="email" required>
                     </div>
                     <div class="mb-4">
                         <input class="form-control fs-form-control" placeholder="Password" id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>

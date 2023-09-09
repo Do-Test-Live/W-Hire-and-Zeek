@@ -161,7 +161,7 @@ $keywords = $data[0]['keywords'];
                 $query_add_on = " and j.job_type='{$_GET['job_type']}'";
             }
 
-            $query = "SELECT * FROM company as c,job_post as j where j.keywords='$keywords' and c.id=j.company_id" . $query_add_on . " order by j.id desc";
+            $query = "SELECT * FROM company as c,job_post as j where c.id=j.company_id" . $query_add_on . " order by j.id desc";
             $data = $db_handle->runQuery($query);
             $row_count = $db_handle->numRows($query);
             for ($i = 0; $i < $row_count; $i++) {

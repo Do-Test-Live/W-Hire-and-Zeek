@@ -69,9 +69,9 @@ if (isset($_POST['registration'])) {
                 ";
 
         $sender_name = "Hire & Zeek";
-        $sender_email = "business@ngt.hk";
+        $sender_email = "test@ngt.hk";
 //
-        $username = "business@ngt.hk";
+        $username = "test@ngt.hk";
         $password = "123Qweasd!@#";
 //
 

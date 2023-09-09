@@ -330,26 +330,8 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <option selected>English</option>
                         </select>
                     </div>
-                </div><!--
-                <div class="row mt-3 mb-2">
-                    <div class="col-1">
-                        <p class="mt-3">
-                            <i class="fa-solid fa-sitemap"></i>
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <p class="mt-3">
-                            Select Mode
-                        </p>
-                    </div>
-                    <div class="col-5 text-end">
-                        <select class="form-select fs-select-control" aria-label="Default select example">
-                            <option selected>Applicant</option>
-                            <option>Hirer</option>
-                        </select>
-                    </div>
-                </div>-->
-                <div class="row mt-3 ">
+                </div>
+                <div class="row mt-3">
                     <div class="col-1">
                         <i class="fa-regular fa-file-lines"></i>
                     </div>

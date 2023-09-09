@@ -180,7 +180,26 @@ if (isset($_POST['favourite'])) {
                                id="tab3-tab" role="tab">Applied Job</a>
                         </li>
                     </ul>
-
+                    <div class="mb-3">
+                        <select class="form-select fs-form-control" aria-label="Default select example" name="keywords"
+                                onchange="changeClass(this.value);" required>
+                            <option value="All" selected>#HashTag</option>
+                            <option value="illustration">#illustration</option>
+                            <option value="Photography">#Photography</option>
+                            <option value="FineArt">#FineArt</option>
+                            <option value="GraphicDesign">#GraphicDesign</option>
+                            <option value="WebDevelopment">#WebDevelopment</option>
+                            <option value="UXDesign">#UXDesign</option>
+                            <option value="UIDesign">#UIDesign</option>
+                            <option value="Animation">#Animation</option>
+                            <option value="Lifestyle">#Lifestyle</option>
+                            <option value="Film&Video">#Film&Video</option>
+                            <option value="Music">#Music</option>
+                            <option value="Marketing">#Marketing</option>
+                            <option value="Business&Management">#Business&Management</option>
+                            <option value="Productivity">#Productivity</option>
+                        </select>
+                    </div>
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div aria-labelledby="tab1-tab" class="tab-pane fade show active" id="tab1" role="tabpanel">
@@ -200,8 +219,8 @@ if (isset($_POST['favourite'])) {
 
                                     if ($apply_job == 0) {
                                         ?>
-                                        <div class="col-6 mt-3">
-                                            <div class="card">
+                                        <div class="col-6 mt-3 all <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
+                                            <div class="card <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
                                                 <input type="checkbox" class="card-checkbox"
                                                        value="<?php echo $data[$i]["id"]; ?>">
                                                 <div class="p-3">
@@ -335,8 +354,8 @@ if (isset($_POST['favourite'])) {
 
                                     if ($apply_job == 0 && $favourite % 2 == 1) {
                                         ?>
-                                        <div class="col-6 mt-3">
-                                            <div class="card">
+                                        <div class="col-6 mt-3 all <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
+                                            <div class="card <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
                                                 <input type="checkbox" class="card-checkbox"
                                                        value="<?php echo $data[$i]["id"]; ?>">
                                                 <div class="p-3">
@@ -465,8 +484,8 @@ if (isset($_POST['favourite'])) {
 
                                     if ($apply_job == 1) {
                                         ?>
-                                        <div class="col-6 mt-3">
-                                            <div class="card">
+                                        <div class="col-6 mt-3 all <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
+                                            <div class="card <?php echo ltrim($data[$i]["keywords"], $data[$i]["keywords"][0]); ?>">
                                                 <input type="checkbox" class="card-checkbox"
                                                        value="<?php echo $data[$i]["id"]; ?>" disabled>
                                                 <div class="p-3">
@@ -656,6 +675,23 @@ if (isset($_POST['favourite'])) {
             });
         });
     });
+
+    function changeClass(selectedKeyword) {
+        var col6Divs = document.querySelectorAll('.col-6'); // Select all col-6 divs
+
+        col6Divs.forEach(function (col) {
+            var card = col.querySelector('.card'); // Find the card within the col-6 div
+            var cardKeywords = card.classList; // Get the classes of the card
+
+            if (selectedKeyword === 'All' || cardKeywords.contains(selectedKeyword)) {
+                col.style.display = 'block'; // Show the col-6 div if it doesn't contain the selected keyword
+            } else {
+                col.style.display = 'none'; // Hide the col-6 div if it contains the selected keyword
+            }
+        });
+
+        console.log(selectedKeyword);
+    }
 </script>
 </body>
 </html>
