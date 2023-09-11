@@ -366,8 +366,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                     </div>
                     <div class="col-8 mt-5 mx-auto text-center">
                         <small>
-                            Version: 4.9.32 (1680654530/2023-04-05)
-                            App: 3f082a1 (1681907643 / 2023-04-19)
+                            Powered by <a href="https://ngt-tech.io" class="text-decoration-none">NGTTech.io</a>
                         </small>
                     </div>
                 </div>

@@ -13,6 +13,8 @@ $userId = $_SESSION['userid'];
 if (isset($_POST['companyProfile'])) {
     $company_title = $db_handle->checkValue($_POST['company_title']);
     $keywords = $db_handle->checkValue($_POST['keywords']);
+    $contact_name = $db_handle->checkValue($_POST['contact_name']);
+    $contact_number = $db_handle->checkValue($_POST['contact_number']);
 
     $image = '';
     if (!empty($_FILES['company_image']['name'])) {
@@ -41,7 +43,7 @@ if (isset($_POST['companyProfile'])) {
     $inserted_at = date('Y-m-d h:i:s');
 
 
-    $query = "INSERT INTO `company`(`customer_id`, `name`, `image`, `keywords`, `inserted_at`) VALUES ('$userId','$company_title','$image','$keywords','$inserted_at')";
+    $query = "INSERT INTO `company`(`customer_id`, `name`, `image`, `keywords`,`contact_name`,`contact_number`, `inserted_at`) VALUES ('$userId','$company_title','$image','$keywords','$contact_name','$contact_number','$inserted_at')";
 
     $insert = $db_handle->insertQuery($query);
 
@@ -101,6 +103,14 @@ if (isset($_POST['companyProfile'])) {
                             <input class="form-control" type="file" name="company_image" id="formFile"
                                    accept="image/png, image/jpeg, image/jpg">
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control fs-form-control" placeholder="Name" type="text"
+                               name="contact_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control fs-form-control" placeholder="Contact number" type="text"
+                               name="contact_number" required>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">

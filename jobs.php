@@ -156,10 +156,10 @@ if (isset($_POST['favourite'])) {
                 <div class="mt-5 text-center">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation" style="width: 150px">
-                            <a aria-controls="tab1" aria-selected="true" class="nav-link active" data-bs-toggle="tab"
+                        <li class="nav-item" role="presentation" style="width: 100px;height:80px;">
+                            <a aria-controls="tab1" aria-selected="true" class="nav-link active pt-3" data-bs-toggle="tab"
                                href="#tab1"
-                               id="tab1-tab" role="tab">
+                               id="tab1-tab" role="tab" style="height: 65px">
                                 <?php
                                 $query = "SELECT * FROM `customer` where id='$userId'";
                                 $data = $db_handle->runQuery($query);
@@ -169,18 +169,18 @@ if (isset($_POST['favourite'])) {
                                 All
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation" style="width: 100px">
-                            <a aria-controls="tab2" aria-selected="false" class="nav-link" data-bs-toggle="tab"
+                        <li class="nav-item" role="presentation" style="width: 100px;height:80px;">
+                            <a aria-controls="tab2" aria-selected="false" class="nav-link pt-3" data-bs-toggle="tab"
                                href="#tab2"
-                               id="tab2-tab" role="tab">Favorites</a>
+                               id="tab2-tab" role="tab" style="height: 65px">Favorites</a>
                         </li>
-                        <li class="nav-item" role="presentation" style="width: 100px">
+                        <li class="nav-item" role="presentation" style="width: 100px;height:80px;">
                             <a aria-controls="tab3" aria-selected="false" class="nav-link" data-bs-toggle="tab"
                                href="#tab3"
-                               id="tab3-tab" role="tab">Applied Job</a>
+                               id="tab3-tab" role="tab" style="height: 65px">Applied Job</a>
                         </li>
                     </ul>
-                    <div class="mb-3">
+                    <div class="mb-3 mt-2">
                         <select class="form-select fs-form-control" aria-label="Default select example" name="keywords"
                                 onchange="changeClass(this.value);" required>
                             <option value="All" selected>#HashTag</option>

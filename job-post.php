@@ -11,7 +11,7 @@ $userId = $_SESSION['userid'];
 
 $company = $db_handle->numRows("SELECT * FROM `company` WHERE customer_id = '$userId'");
 
-if($company==0){
+if ($company == 0) {
     echo "<script>
                 alert('Create Hirer profile First for post Job.');
                 window.location.href='company-profile.php';
@@ -29,7 +29,7 @@ if (isset($_POST['jobPost'])) {
     $contact = $db_handle->checkValue($_POST['contact']);
     $keywords = $db_handle->checkValue($_POST['keywords']);
 
-    $company_id=$db_handle->checkValue($_POST['company']);;
+    $company_id = $db_handle->checkValue($_POST['company']);;
 
     $inserted_at = date('Y-m-d h:i:s');
 
@@ -89,16 +89,20 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
             <div class="col-12">
                 <form method="post" action="">
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Job Title" type="text" name="job_title" required>
+                        <input class="form-control fs-form-control" placeholder="Job Title" type="text" name="job_title"
+                               required>
                     </div>
                     <div class="mb-3">
-                        <textarea class="form-control fs-form-control" name="job_description" placeholder="Job Description..." rows="4" required></textarea>
+                        <textarea class="form-control fs-form-control" name="job_description"
+                                  placeholder="Job Description..." rows="4" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Salary/Rate" type="number" name="salary" required>
+                        <input class="form-control fs-form-control" placeholder="Salary/Rate" type="number"
+                               name="salary" required>
                     </div>
                     <div class="mb-3">
-                        <select class="form-select fs-form-control" aria-label="Default select example" name="salary_rate" required>
+                        <select class="form-select fs-form-control" aria-label="Default select example"
+                                name="salary_rate" required>
                             <option value="Hour" selected>Hour</option>
                             <option value="Day">Day</option>
                             <option value="Month">Month</option>
@@ -106,7 +110,8 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         </select>
                     </div>
                     <div class="mb-3">
-                        <select class="form-select fs-form-control" aria-label="Default select example" name="job_type" required>
+                        <select class="form-select fs-form-control" aria-label="Default select example" name="job_type"
+                                required>
                             <option value="Full-Time" selected>Full-Time</option>
                             <option value="Part-Time">Part-Time</option>
                             <option value="Freelance">Freelance</option>
@@ -114,83 +119,120 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                         </select>
                     </div>
                     <div class="mb-3">
-                        <select class="form-select fs-form-control" aria-label="Default select example" name="company" required>
+                        <select class="form-select fs-form-control" aria-label="Default select example"
+                                onchange="setName(this.value);" name="company" required>
+                            <?php
+                            $query = "select * from company where customer_id = '$userId'";
+                            $data = $db_handle->runQuery($query);
+                            $row_count = $db_handle->numRows($query);
+                            for ($i = 0; $i < $row_count; $i++) {
+                                ?>
+                                <option value="<?php echo $data[$i]['id']; ?>"><?php echo $data[$i]['name']; ?></option>
+                                <?php
+                            } ?>
+                        </select>
+                    </div>
+
+                    <script>
+                        function setName(val) {
                             <?php
                             $query = "select * from company where customer_id = '$userId'";
                             $data = $db_handle->runQuery($query);
                             $row_count = $db_handle->numRows($query);
                             for ($i = 0; $i < $row_count; $i++) {
                             ?>
-                                <option value="<?php echo $data[$i]['id']; ?>"><?php echo $data[$i]['name']; ?></option>
-                                <?php
-
+                            if (val == <?php echo $data[$i]['id']; ?>){
+                                document.getElementById('contact_name').value='<?php echo $data[$i]['contact_name']; ?>';
+                                document.getElementById('contact_number').value='<?php echo $data[$i]['contact_number']; ?>';
+                            }
+                            <?php
                             } ?>
-                        </select>
-                    </div>
+                        }
+                    </script>
 
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Name" type="text" value="<?php echo $fetch_user[0]['fname']; ?> <?php echo $fetch_user[0]['surname']; ?>" name="name" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Name" type="text"
+                               id="contact_name"
+                               value="<?php echo $data[0]['contact_name']; ?>"
+                               name="name" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Address" type="text" name="address" value="<?php echo $fetch_user[0]['region']; ?>" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Address" type="text"
+                               name="address" value="<?php echo $fetch_user[0]['region']; ?>" required>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control fs-form-control" placeholder="Contact Number" type="text" name="contact" value="<?php echo $fetch_user[0]['phone_number']; ?>" required>
+                        <input class="form-control fs-form-control" placeholder="Contact Number" type="text"
+                               id="contact_number" name="contact" value="<?php echo $data[0]['contact_number']; ?>"
+                               required>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #illustration
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Photography
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #FineArt
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #GraphicDesign
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #WebDevelopment
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #UXDesign
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #UIDesign
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn ms-3 mt-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Animation
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Lifestyle
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Film & Video
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Music
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Marketing
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Business & Management
                         </button>
 
-                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button" onclick="toggleButton(this)">
+                        <button class="btn btn-outline-success fs-expertise-check-btn mt-3 ms-3" type="button"
+                                onclick="toggleButton(this)">
                             <i class="fa-regular fa-circle"></i> #Productivity
                         </button>
 
@@ -199,13 +241,15 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                             <i class="fa-regular fa-circle"></i> #Others
                         </button>
                         <div class="hidden mt-3" id="othersInput">
-                            <input type="text" class="form-control" onkeyup="othersValue(this.value);" onkeydown="othersValue(this.value);" value="" name="others"/>
+                            <input type="text" class="form-control" onkeyup="othersValue(this.value);"
+                                   onkeydown="othersValue(this.value);" value="" name="others"/>
                         </div>
 
                         <input type="hidden" id="outputInput" name="keywords" required>
                     </div>
                     <div class="mb-5 pb-5">
-                        <button type="submit" name="jobPost" class="btn btn-primary fs-lan-primary-btn w-100">Submit</button>
+                        <button type="submit" name="jobPost" class="btn btn-primary fs-lan-primary-btn w-100">Submit
+                        </button>
                     </div>
                 </form>
             </div>
@@ -255,8 +299,8 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
     let selectedValue = '';
     let outputInput = document.getElementById("outputInput");
 
-    function othersValue(val){
-        outputInput.value='#'+val.replace(/\s/g, '');
+    function othersValue(val) {
+        outputInput.value = '#' + val.replace(/\s/g, '');
     }
 
     function othersButton(button) {
