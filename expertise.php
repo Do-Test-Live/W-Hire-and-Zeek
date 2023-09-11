@@ -158,75 +158,86 @@ date_default_timezone_set("Asia/Hong_Kong");
 <script src="assets/js/main.js"></script>
 
 <script>
-    let selectedValue = '';
     let outputInput = document.getElementById("outputInput");
+    let othersButtonSelected = false;
 
-    function othersValue(val){
-        outputInput.value='#'+val.replace(/\s/g, '');
+    function othersValue(val) {
+        outputInput.value = '#' + val.replace(/\s/g, '');
     }
 
-    function othersButton(button) {
-        removeAllExpertiseCheckClasses();
+    function othersButton(button){
+        let icon = button.querySelector("i");
+        let inputField = document.getElementById("othersInput");
+
+        othersButtonSelected = !othersButtonSelected; // Toggle the state of the Others button
+        if (othersButtonSelected) {
+            removeAllExpertiseCheckClasses(); // Unselect all other buttons
+        }
+        inputField.style.display = othersButtonSelected ? "block" : "none";
+        outputInput.value = othersButtonSelected ? '' : ''; // Clear the keywords if Others is deselected
+
+        if (button.classList.contains("fs-expertise-check-btn-check")) {
+            button.classList.remove("fs-expertise-check-btn-check");
+            button.classList.add("fs-expertise-check-btn");
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.classList.remove("fa-circle-check");
+            icon.classList.add("fa-circle");
+        } else {
+            button.classList.remove("fs-expertise-check-btn");
+            button.classList.add("fs-expertise-check-btn-check");
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+            icon.classList.remove("fa-circle");
+            icon.classList.add("fa-circle-check");
+        }
+    }
+
+    function toggleButton(button) {
         let icon = button.querySelector("i");
         let buttonText = button.textContent.trim();
         let inputField = document.getElementById("othersInput");
 
-        if (button.classList.contains("fs-expertise-check-btn")) {
-            button.classList.remove("fs-expertise-check-btn");
-            button.classList.add("fs-expertise-check-btn-check");
 
-            icon.classList.remove("fa-regular");
-            icon.classList.add("fa-solid");
-            icon.classList.remove("fa-circle");
-            icon.classList.add("fa-circle-check");
+        let othersBtn=document.getElementById('othersBtn');
 
-            inputField.style.display = "block";
-        } else {
+        if (button.textContent.trim() === "Others") {
+            othersButtonSelected = !othersButtonSelected; // Toggle the state of the Others button
+            if (othersButtonSelected) {
+                removeAllExpertiseCheckClasses(); // Unselect all other buttons
+            }
+            inputField.style.display = othersButtonSelected ? "block" : "none";
+            outputInput.value = othersButtonSelected ? '' : ''; // Clear the keywords if Others is deselected
+        } else if (button.classList.contains("fs-expertise-check-btn-check")) {
             button.classList.remove("fs-expertise-check-btn-check");
             button.classList.add("fs-expertise-check-btn");
-
             icon.classList.remove("fa-solid");
             icon.classList.add("fa-regular");
             icon.classList.remove("fa-circle-check");
             icon.classList.add("fa-circle");
-
-            inputField.style.display = "none";
-        }
-    }
-
-
-    function toggleButton(button) {
-        removeAllExpertiseCheckClasses();
-        let icon = button.querySelector("i");
-        let buttonText = button.textContent.trim();
-
-        if (button.classList.contains("fs-expertise-check-btn")) {
+        } else {
             button.classList.remove("fs-expertise-check-btn");
             button.classList.add("fs-expertise-check-btn-check");
-
             icon.classList.remove("fa-regular");
             icon.classList.add("fa-solid");
             icon.classList.remove("fa-circle");
             icon.classList.add("fa-circle-check");
-
-            outputInput.value = buttonText;
-        } else {
-            button.classList.remove("fs-expertise-check-btn-check");
-            button.classList.add("fs-expertise-check-btn");
-
-            icon.classList.remove("fa-solid");
-            icon.classList.add("fa-regular");
-            icon.classList.remove("fa-circle-check");
-            icon.classList.add("fa-circle");
-
-            outputInput.value = '';
         }
-    }
 
+        othersButtonSelected = !othersButtonSelected;
+        othersBtn.classList.remove("fs-expertise-check-btn-check");
+        othersBtn.classList.add("fs-expertise-check-btn");
+        othersBtn.querySelector("i").classList.remove("fa-solid");
+        othersBtn.querySelector("i").classList.add("fa-regular");
+        othersBtn.querySelector("i").classList.remove("fa-circle-check");
+        othersBtn.querySelector("i").classList.add("fa-circle");
+        document.getElementById("othersInput").style.display='none';
+
+        updateOutputInput();
+    }
 
     function removeAllExpertiseCheckClasses() {
         const buttons = document.querySelectorAll(".btn.fs-expertise-check-btn-check");
-
         buttons.forEach(button => {
             let icon = button.querySelector("i");
             button.classList.remove("fs-expertise-check-btn-check");
@@ -238,6 +249,11 @@ date_default_timezone_set("Asia/Hong_Kong");
         });
     }
 
+    function updateOutputInput() {
+        const selectedButtons = document.querySelectorAll(".btn.fs-expertise-check-btn-check");
+        const selectedValues = Array.from(selectedButtons).map(button => button.textContent.trim());
+        outputInput.value = selectedValues.join(', ');
+    }
 </script>
 
 </body>
