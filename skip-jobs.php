@@ -31,6 +31,7 @@ if (isset($_POST['favourite'])) {
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/vendor/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
         .card {
@@ -62,11 +63,20 @@ if (isset($_POST['favourite'])) {
         .card-body {
             border-top: 1px solid white;
         }
+
+        .select2-selection.select2-selection--single {
+            height: 40px;
+        }
+
+        .select2-selection__rendered {
+            padding-left: 2rem !important;
+            padding-top: 0.25rem;
+        }
     </style>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="fs-job">
+    <div class="fs-job pb-5" style="height: unset">
         <div class="row mb-3 head-banner p-2 flex align-items-center justify-content-center">
             <div class="col-2">
                 <img class="img-fluid" src="assets/images/13/menu.webp" style="width: 29px;">
@@ -74,7 +84,38 @@ if (isset($_POST['favourite'])) {
             <div class="col-8 pe-3">
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input class="form-control" placeholder="Search an Applicant" type="text">
+                    <?php
+                    $query = "SELECT keywords FROM job_post ORDER BY id DESC";
+                    $data = $db_handle->runQuery($query);
+
+                    // Create an array to store unique keywords
+                    $uniqueKeywords = [];
+
+                    foreach ($data as $row) {
+                        // Split the keywords using ',' as the separator
+                        $keywords = explode(',', $row["keywords"]);
+
+                        foreach ($keywords as $keyword) {
+                            // Trim each keyword to remove leading/trailing spaces
+                            $keyword = trim($keyword);
+
+                            // Check if the keyword is not empty and not already in the uniqueKeywords array
+                            if (!empty($keyword) && !in_array($keyword, $uniqueKeywords)) {
+                                $uniqueKeywords[] = $keyword; // Add the unique keyword to the array
+                            }
+                        }
+                    }
+
+                    // Sort the unique keywords alphabetically
+                    sort($uniqueKeywords);
+                    ?>
+                    <select class="js-example-disabled-results form-control" name="job_keywords"
+                            onchange="showTask(this.value);">
+                        <option value="">Select an task</option>
+                        <?php foreach ($uniqueKeywords as $keyword) : ?>
+                            <option value="<?php echo $keyword; ?>"><?php echo $keyword; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <div class="col-1">
@@ -168,7 +209,7 @@ if (isset($_POST['favourite'])) {
                         </select>
                     </div>
                     <!-- Tab panes -->
-                    <div class="tab-content">
+                    <div class="tab-content" id="searchResult">
                         <div aria-labelledby="tab1-tab" class="tab-pane fade show active" id="tab1" role="tabpanel">
                             <div class="row">
                                 <?php
@@ -370,8 +411,22 @@ if (isset($_POST['favourite'])) {
 <script src="assets/vendor/OwlCarousel/js/owl.carousel.min.js"></script>
 <script src="assets/vendor/toastr/js/toastr.min.js" type="text/javascript"></script>
 <script src="assets/js/toastr-init.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
+    let $disabledResults = $(".js-example-disabled-results");
+    $disabledResults.select2();
+
+    function showTask(val) {
+        $.ajax({
+            type: 'GET',
+            url: 'show_task_job.php',
+            data: {keywords: val},
+            success: function (data) {
+                $('#searchResult').html(data);
+            }
+        });
+    }
     document.addEventListener("DOMContentLoaded", function () {
         const checkboxes = document.querySelectorAll("input[type='checkbox']");
         const resultDisplay = document.getElementById("result");
