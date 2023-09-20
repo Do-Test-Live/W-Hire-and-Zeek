@@ -52,7 +52,7 @@ $keywords = $data[0]['keywords'];
     <link href="assets/vendor/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/vendor/FontAwesome/css/all.min.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <style>
         .checked {
             color: #059d00;
@@ -84,11 +84,11 @@ $keywords = $data[0]['keywords'];
             cursor: pointer;
         }
 
-        .select2-selection.select2-selection--single{
+        .select2-selection.select2-selection--single {
             height: 40px;
         }
 
-        .select2-selection__rendered{
+        .select2-selection__rendered {
             padding-left: 2rem !important;
             padding-top: 0.25rem;
         }
@@ -129,7 +129,8 @@ $keywords = $data[0]['keywords'];
                     // Sort the unique keywords alphabetically
                     sort($uniqueKeywords);
                     ?>
-                    <select class="js-example-disabled-results form-control" name="job_keywords">
+                    <select class="js-example-disabled-results form-control" name="job_keywords"
+                            onchange="showTask(this.value);">
                         <option value="">Select an task</option>
                         <?php foreach ($uniqueKeywords as $keyword) : ?>
                             <option value="<?php echo $keyword; ?>"><?php echo $keyword; ?></option>
@@ -237,7 +238,8 @@ $keywords = $data[0]['keywords'];
                                                         class="text-muted"> per
                                                     <?php echo strtolower($data[$i]["salary"]); ?></small></p>
                                             <p class="card-text"><small
-                                                        class="text-muted"><?php echo $data[$i]["keywords"]; ?></small></p>
+                                                        class="text-muted"><?php echo $data[$i]["keywords"]; ?></small>
+                                            </p>
                                         </div>
                                         <div class="row">
                                             <div class="col-4">
@@ -252,7 +254,8 @@ $keywords = $data[0]['keywords'];
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="staticBackdrop<?php echo $data[$i]["id"]; ?>" data-bs-backdrop="static"
+                        <div class="modal fade" id="staticBackdrop<?php echo $data[$i]["id"]; ?>"
+                             data-bs-backdrop="static"
                              data-bs-keyboard="false" tabindex="-1"
                              aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -289,7 +292,8 @@ $keywords = $data[0]['keywords'];
                                         <div>
                                             <p>
                                                 <span class="badge text-bg-success">Salary/Rate:</span>
-                                                $<?php echo $data[$i]["salary"]; ?> HKD per <?php echo strtolower($data[$i]["salary"]); ?>
+                                                $<?php echo $data[$i]["salary"]; ?> HKD
+                                                per <?php echo strtolower($data[$i]["salary"]); ?>
                                             </p>
                                             <p>
                                                 <span class="badge text-bg-success">Job type:</span> <?php echo $data[$i]["job_type"]; ?>
@@ -314,7 +318,8 @@ $keywords = $data[0]['keywords'];
                                         <form action="" method="post">
                                             <input type="hidden" name="job_id" value="<?php echo $data[$i]["id"]; ?>"
                                                    required>
-                                            <button type="submit" class="btn btn-success fs-button-apply" name="apply">Apply
+                                            <button type="submit" class="btn btn-success fs-button-apply" name="apply">
+                                                Apply
                                             </button>
                                         </form>
                                     </div>
@@ -367,6 +372,17 @@ $keywords = $data[0]['keywords'];
 <script>
     let $disabledResults = $(".js-example-disabled-results");
     $disabledResults.select2();
+
+    function showTask(val) {
+        $.ajax({
+            type: 'GET',
+            url: 'show_task.php',
+            data: {keywords: val},
+            success: function (data) {
+                $('#searchResult').html(data);
+            }
+        });
+    }
 </script>
 </body>
 </html>
