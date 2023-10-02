@@ -2,6 +2,21 @@
 session_start();
 include('../include/dbController.php');
 $db_handle = new DBController();
+
+if (isset($_GET['delete_id'])) {
+
+    $id = $_GET['delete_id'];
+    $query = "DELETE FROM `customer` WHERE id='$id'";
+
+    $insert = $db_handle->insertQuery($query);
+
+    if ($insert) {
+        echo "<script>
+                alert('Data Deleted.');
+                window.location.href='userdata.php';
+                </script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +75,7 @@ $db_handle = new DBController();
                                     <th>Gender</th>
                                     <th>Region</th>
                                     <th>Keywords</th>
+                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -73,6 +89,7 @@ $db_handle = new DBController();
                                     <th>Gender</th>
                                     <th>Region</th>
                                     <th>Keywords</th>
+                                    <th>Delete</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -94,6 +111,10 @@ $db_handle = new DBController();
                                         <td><?php echo $data[$i]["gender"]; ?></td>
                                         <td><?php echo $data[$i]["region"]; ?></td>
                                         <td><?php echo $data[$i]["keywords"]; ?></td>
+                                        <td>
+                                            <a href="userdata.php?delete_id=<?php echo $data[$i]["id"]; ?>"
+                                               class="btn btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
