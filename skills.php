@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
                         <table cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px; margin: 0 auto;'>
                             <tr>
                                 <td bgcolor='#ffffff' style='padding: 20px; text-align: center; color: #ffffff;'>
-                                    <img src='https://hireandzeek.com/assets/images/logo.webp' alt='' style='max-height:80px'>
+                                    <img src='https://hireandzeek.com/assets/images/logo.png' alt='' style='max-height:80px'>
                                 </td>
                             </tr>
                             <tr>
