@@ -2,6 +2,14 @@
 require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
+
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 if (isset($_POST['submit'])) {
 
     $username = $db_handle->checkValue($_POST['username']);
@@ -21,7 +29,76 @@ if (isset($_POST['submit'])) {
 
     $insert = $db_handle->insertQuery($query);
 
-    if ($insert) {
+
+    $email_to = $db_handle->notify_email();
+    $subject = 'Email From Hire and Zeek';
+
+
+
+    $messege = "<!DOCTYPE html>
+                <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <title>Registration</title>
+                    </head>
+                    <body style='font-family: Arial, sans-serif; background-color: #f4f4f4;'>
+                        <table cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px; margin: 0 auto;'>
+                            <tr>
+                                <td bgcolor='#ffffff' style='padding: 20px; text-align: center; color: #ffffff;'>
+                                    <img src='https://hireandzeek.com/assets/images/logo.webp' alt='' style='max-height:80px'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style='background-color: #ffffff; padding: 20px;'>
+                                    <h1 style='color: #333;text-align: center;'>Thank You for Registering!</h1>
+                                    <p style='color: #666;'>Dear User,</p>
+                                    <p style='color: #666;'>Thank you for registering on our website. We are excited to have you join our community!</p>
+                                    <p style='color: #666;'>Please feel free to explore our website and take advantage of all the features we offer.</p>
+                                    <p style='color: #666;'>Best regards,<br/>Hire and Zeek</p>
+                                    <p style='color: #940000;text-align: center;margin-top: 3rem'>This email was sent automatically. Please do not reply.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor='#007549' style='padding: 20px; text-align: center; color: #ffffff;'>
+                                    <p>Email: <a href='mailto:business@hireandzeek.com' style='text-decoration: none;color: white;'>business@hireandzeek.com</a></p>
+                                    <p>Copyright 2023 by Hire and ZeeK | Powered by <a href='https://ngt.hk' style='text-decoration: none;color: white;'>ngt-tech.io</a></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                </html>
+                ";
+
+    $sender_name = "Hire and Zeek";
+    $sender_email = "business@hireandzeek.com";
+//
+    $username = "business@hireandzeek.com";
+    $password = "c131?6m~1rmq";
+//
+    $receiver_email = $email_to;
+
+
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+
+    $mail->Host = 'mail.hireandzeek.com';
+
+    $mail->SMTPAuth = true;
+
+    $mail->SMTPSecure = 'ssl';
+
+    $mail->Port = 465;
+
+    $mail->setFrom($sender_email, $sender_name);
+    $mail->Username = $username;
+    $mail->Password = $password;
+
+    $mail->Subject = $subject;
+    $mail->msgHTML($messege);
+    $mail->addAddress($receiver_email);
+
+
+    if ($mail->send()&&$insert) {
         echo "<script>
                 document.cookie = 'alert = 6;';
                 window.location.href='login.php';

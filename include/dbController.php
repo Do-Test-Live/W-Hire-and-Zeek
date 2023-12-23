@@ -5,15 +5,15 @@ class DBController {
     private $password = "";
     private $database = "hirezeek";
     private $from_email='business@hirezeek.com';
-    private $notification_email='mingowhk@gmail.com';
+    private $notification_email='frogbidofficial@gmail.com';
     private $conn;
 
     function __construct() {
-        if($_SERVER['SERVER_NAME']=="www.hireandzeek.ngt.hk"||$_SERVER['SERVER_NAME']=="hireandzeek.ngt.hk"){
+        if($_SERVER['SERVER_NAME']=="www.hireandzeek.com"||$_SERVER['SERVER_NAME']=="hireandzeek.com"){
             $this->host = "localhost";
-            $this->user = "upnb8u5yepuix";
+            $this->user = "ukokq4drssset";
             $this->password = "+91iexAy61@)";
-            $this->database = "dbybeddfkdftvr";
+            $this->database = "dbd3ugbgpco6sw";
         }
 
         $this->conn = $this->connectDB();
